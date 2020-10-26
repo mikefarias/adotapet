@@ -28,6 +28,11 @@ namespace adotapet.Controllers
             return View();
         }
 
+        public IActionResult Ong()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
