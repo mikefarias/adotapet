@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -15,7 +16,9 @@ namespace adotapet.Models
 
         public string Breed { get; set; }
 
-        public Ong Ong { get; set; }
+        [ForeignKey("Ong")]
+        public int IdOng { get; set; }
+        public virtual Ong Ong { get; set; }
 
         public double Weight { get; set; }
 
