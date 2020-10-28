@@ -6,21 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using adotapet.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace adotapet.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly Context _context;
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(Context context, ILogger<HomeController> logger)
         {
+            _context = context;
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Pet.ToListAsync());
         }
 
         public IActionResult Privacy()
