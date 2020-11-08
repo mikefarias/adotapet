@@ -90,7 +90,7 @@ namespace adotapet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,DateOfBirth,Breed,IdOng,Weight,IsAdopted")] Pet pet)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Abstract, DateOfBirth,Breed,IdOng,Weight,IsAdopted")] Pet pet)
         {
             if (id != pet.Id)
             {
