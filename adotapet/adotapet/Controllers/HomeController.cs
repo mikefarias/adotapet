@@ -28,11 +28,6 @@ namespace adotapet.Controllers
             return View(await _context.Pet.ToListAsync());
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
         public IActionResult Ong()
         {
             return View();
