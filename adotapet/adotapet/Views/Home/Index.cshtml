@@ -6,22 +6,26 @@
 
 <h1>Index</h1>
 
-<table class="table">
-    <thead>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-         <td>
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="..." alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                        <p class="card-text">@Html.DisplayFor(modelItem => item.Abstract)</p>
-                        <a href="#" class="btn btn-primary">Adotar</a>
-                    </div>
+<div class="card-deck">
+
+
+    @foreach (var item in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            @if (item.Photo != null)
+            {
+                <img class="card-img-top" src="~/img/profile_pet/@item.Photo" alt="@item.Photo">
+            }
+            else
+            {
+                <img class="card-img-top" src="~/img/profile_pet/image-not-found.png" alt="Card image cap">
+            }
+
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+                <p class="card-text">@Html.DisplayFor(modelItem => item.Abstract)</p>
+                <a href="#" class="btn btn-primary">Adotar</a>
             </div>
-         </td>
-        }
-    </tbody>
-</table>
+        </div>
+    }
+</div>
