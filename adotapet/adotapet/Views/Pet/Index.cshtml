@@ -11,7 +11,8 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr><th>
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -40,6 +41,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @if (@item.Photo != null)
+                {
+                    <img src="~/img/profile_pet/@item.Photo" alt="@item.Photo" class="rounded-circle" height="40" width="40" asp-append-version="true">
+                }
+                else
+                {
+                    <img src="~/img/profile_pet/image-not-found.png" alt="Card image cap" class="rounded-circle" height="40" width="40" asp-append-version="true">
+                }
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
@@ -61,9 +72,9 @@
                 @Html.DisplayFor(modelItem => item.IsAdopted)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
             </td>
         </tr>
 }
