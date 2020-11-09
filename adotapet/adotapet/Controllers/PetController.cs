@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using adotapet.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace adotapet.Controllers
 {
@@ -13,9 +17,12 @@ namespace adotapet.Controllers
     {
         private readonly Context _context;
 
-        public PetController(Context context)
+        IWebHostEnvironment _appEnvironment;
+
+        public PetController(Context context, IWebHostEnvironment env)
         {
             _context = context;
+            _appEnvironment = env;
         }
 
         // GET: Pet
@@ -56,18 +63,46 @@ namespace adotapet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,DateOfBirth,Breed,IdOng,Weight,IsAdopted")] Pet pet)
+        public async Task<IActionResult> Create(PetViewModel model)
         {
             if (ModelState.IsValid)
             {
+                string nomeUnicoArquivo = UploadedFile(model);
+
+                Pet pet = new Pet
+                {
+                    Name = model.Name,
+                    Abstract = model.Abstract,
+                    Photo = nomeUnicoArquivo,
+                    DateOfBirth = model.DateOfBirth,
+                    Breed = model.Breed,
+                    Weight = model.Weight,
+                    IdOng = model.IdOng,
+                    Ong = model.Ong
+                };
                 _context.Add(pet);
-                await _context.SaveChangesAsync();
+                    await _context .SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Name", pet.IdOng);
-            return View(pet);
+            return View(model);
         }
 
+        private string UploadedFile(PetViewModel model)
+        {
+            string nomeUnicoArquivo = null;
+
+            if (model.Photo != null)
+            {
+                string pastaFotos = Path.Combine(_appEnvironment.WebRootPath, "img\\profile_pet");
+                nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                string caminhoArquivo = Path.Combine(pastaFotos, nomeUnicoArquivo);
+                using (var fileStream = new FileStream(caminhoArquivo, FileMode.Create))
+                {
+                    model.Photo.CopyTo(fileStream);
+                }
+            }
+            return nomeUnicoArquivo;
+        }
         // GET: Pet/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

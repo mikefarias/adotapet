@@ -4,13 +4,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Criar</h1>
 
 <h4>Pet</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form method="post" enctype="multipart/form-data" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -21,6 +21,14 @@
                 <label asp-for="Abstract" class="control-label"></label>
                 <input asp-for="Abstract" class="form-control" />
                 <span asp-validation-for="Abstract" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="custom-file-input" type="file" id="customFile">
+                    <label class="custom-file-label" for="customFile">Escolha a imagem</label>
+                </div>
+                <span asp-validation-for="Photo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>

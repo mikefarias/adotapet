@@ -17,6 +17,9 @@ namespace adotapet.Models
         [DisplayName("Resumo")]
         public string Abstract { get; set; }
 
+        [DisplayName("Foto")]
+        public String Photo { get; set; }
+
         [DisplayName("Data de Nascimento")]
         public string DateOfBirth { get; set; }
 

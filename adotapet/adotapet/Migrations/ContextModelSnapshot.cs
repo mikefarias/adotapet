@@ -67,6 +67,9 @@ namespace adotapet.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 

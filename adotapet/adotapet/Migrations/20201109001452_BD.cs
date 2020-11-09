@@ -2,7 +2,7 @@
 
 namespace adotapet.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class BD : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,9 +29,11 @@ namespace adotapet.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
+                    Abstract = table.Column<string>(nullable: true),
+                    Photo = table.Column<string>(nullable: true),
                     DateOfBirth = table.Column<string>(nullable: true),
                     Breed = table.Column<string>(nullable: true),
-                    OngId = table.Column<int>(nullable: true),
+                    IdOng = table.Column<int>(nullable: false),
                     Weight = table.Column<double>(nullable: false),
                     IsAdopted = table.Column<bool>(nullable: false)
                 },
@@ -39,17 +41,17 @@ namespace adotapet.Migrations
                 {
                     table.PrimaryKey("PK_Pet", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pet_Ong_OngId",
-                        column: x => x.OngId,
+                        name: "FK_Pet_Ong_IdOng",
+                        column: x => x.IdOng,
                         principalTable: "Ong",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pet_OngId",
+                name: "IX_Pet_IdOng",
                 table: "Pet",
-                column: "OngId");
+                column: "IdOng");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

@@ -13,7 +13,7 @@ namespace adotapet.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb;Database=adotapet;Integrated Security=True");
+            optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb;Database=adotapet3;Integrated Security=True");
         }
 
         public DbSet<adotapet.Models.Ong> Ong { get; set; }
