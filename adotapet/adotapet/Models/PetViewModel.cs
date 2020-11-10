@@ -8,6 +8,7 @@ namespace adotapet.Models
 {
     public class PetViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Abstract { get; set; }

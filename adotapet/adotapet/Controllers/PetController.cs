@@ -125,15 +125,27 @@ namespace adotapet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Abstract, DateOfBirth,Breed,IdOng,Weight,IsAdopted")] Pet pet)
+        public async Task<IActionResult> Edit(int id, PetViewModel model)
         {
-            if (id != pet.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                string nomeUnicoArquivo = UploadedFile(model);
+
+                var pet = await _context.Pet.FindAsync(id);
+                pet.Name = model.Name;
+                pet.Abstract = model.Abstract;
+                pet.Photo = nomeUnicoArquivo;
+                pet.DateOfBirth = model.DateOfBirth;
+                pet.Breed = model.Breed;
+                pet.Weight = model.Weight;
+                pet.IdOng = model.IdOng;
+                pet.Ong = model.Ong;
+
                 try
                 {
                     _context.Update(pet);
@@ -152,8 +164,8 @@ namespace adotapet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Name", pet.IdOng);
-            return View(pet);
+            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Name", model.IdOng);
+            return View(model);
         }
 
         // GET: Pet/Delete/5

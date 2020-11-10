@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form method="post" enctype="multipart/form-data" asp-action="Edit" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -24,6 +24,14 @@
                 <span asp-validation-for="Abstract" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Photo" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Photo" class="custom-file-input" type="file" id="customFile">
+                    <label class="custom-file-label" for="customFile">Escolha a imagem</label>
+                </div>
+                <span asp-validation-for="Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="DateOfBirth" class="control-label"></label>
                 <input asp-for="DateOfBirth" class="form-control" />
                 <span asp-validation-for="DateOfBirth" class="text-danger"></span>
@@ -34,8 +42,8 @@
                 <span asp-validation-for="Breed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Ong" class="control-label"></label>
-                <select asp-for="Ong" class="form-control" asp-items="ViewBag.IdOng"></select>
+                <label asp-for="IdOng" class="control-label"></label>
+                <select asp-for="IdOng" class="form-control" asp-items="ViewBag.IdOng"></select>
                 <span asp-validation-for="Ong" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -49,14 +57,14 @@
                 </label>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Voltar</a>
 </div>
 
 @section Scripts {
