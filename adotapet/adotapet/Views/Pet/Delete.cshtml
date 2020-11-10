@@ -12,6 +12,19 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Photo)
+        </dt>
+        <dd class="col-sm-10">
+            @if (@Html.DisplayFor(model => model.Photo) != null)
+            {
+                <img src="~/img/profile_pet/@Html.DisplayFor(model => model.Photo)" alt="@Html.DisplayFor(model => model.Photo)" class="rounded-circle" height="40" width="40" >
+            }
+            else
+            {
+                <img src="~/img/profile_pet/image-not-found.png" alt="Card image cap" class="rounded-circle" height="40" width="40">
+            }
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
         <dd class="col-sm-10">
@@ -38,10 +51,10 @@
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ong)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Ong.Name)
-        </dd class>
-        <dt class = "col-sm-2">
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Weight)
         </dt>
         <dd class="col-sm-10">
