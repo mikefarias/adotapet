@@ -4,26 +4,29 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="card-deck">
 
-<div class="card-deck">
-
-    @foreach (var item in Model)
-    {
-        <div class="card mb-3" style="width: 18rem;">
-            @if (item.Photo != null)
-            {
-                <img class="card-img-top" src="~/img/profile_pet/@item.Photo" alt="@item.Photo">
-            }
-            else
-            {
-                <img class="card-img-top img-fluid" src="~/img/profile_pet/image-not-found.png" alt="Card image cap">
-            }
-            <div class="card-body">
-                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
-                <p class="card-text">@Html.DisplayFor(modelItem => item.Abstract)</p>
-                <a href="#" class="btn btn-primary">Adotar</a>
+                @foreach (var item in Model)
+                 {
+                <div class="card mb-3" style="width: 18rem;">
+                    @if (item.Photo != null)
+                    {
+                        <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Pet">
+                            <img class="card-img-top" src="~/img/profile_pet/@item.Photo" alt="@item.Photo">
+                        </a>
+                    }
+                    else
+                    {
+                    <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Pet">
+                        <img class="card-img-top img-fluid" src="~/img/profile_pet/image-not-found.png" alt="Card image cap">
+                    </a>
+                    }
+                </div>
+                 }
             </div>
         </div>
-    }
-</div>
+    </div>
+</section>
