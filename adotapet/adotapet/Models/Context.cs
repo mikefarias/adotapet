@@ -17,5 +17,9 @@ namespace adotapet.Models
         }
 
         public DbSet<adotapet.Models.Ong> Ong { get; set; }
+
+        public DbSet<adotapet.Models.Adotante> Adotante { get; set; }
+
+        public DbSet<adotapet.Models.Entrevista> Entrevista { get; set; }
     }
 }
