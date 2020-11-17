@@ -21,7 +21,10 @@ namespace adotapet.Controllers
         // GET: Entrevista
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Entrevista.ToListAsync());
+            var context = _context.Entrevista.
+                Include(p => p.Pet).
+                Include(p => p.Adotante);
+             return View(await context.ToListAsync());
         }
 
         // GET: Entrevista/Details/5
@@ -55,15 +58,23 @@ namespace adotapet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Nome,Data")] Entrevista entrevista)
+        public async Task<IActionResult> Create(EntrevistaModelView model)
         {
             if (ModelState.IsValid)
             {
+                Entrevista entrevista = new Entrevista
+                {
+                    Pet = model.Pet,
+                    IdPet = model.IdPet,
+                    Adotante = model.Adotante,
+                    IdAdotante = model.IdAdotante,
+                    Data = model.Data
+                };
                 _context.Add(entrevista);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(entrevista);
+            return View(model);
         }
 
         // GET: Entrevista/Edit/5
@@ -79,6 +90,7 @@ namespace adotapet.Controllers
             {
                 return NotFound();
             }
+            ViewData["IdPet"] = new SelectList(_context.Pet, "IdPet", "Name", entrevista.IdPet);
             return View(entrevista);
         }
 
