@@ -12,16 +12,16 @@ namespace adotapet.Models
         public int Id { get; set; }
 
         [DisplayName("Nome")]
-        public string Name{ get; set; }
+        public string Nome{ get; set; }
 
         [DisplayName("CNPJ")]
         public double Cnpj{ get; set; }
 
         [DisplayName("Endereço")]
-        public string Address { get; set; }
+        public string Endereco { get; set; }
 
         [DisplayName("Contato")]
-        public string Contact { get; set; }
+        public string Contato { get; set; }
 
 
     }

@@ -25,7 +25,7 @@ namespace adotapet.Controllers
         }
 
         // GET: Ong/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Detalhes(int? id)
         {
             if (id == null)
             {
@@ -42,8 +42,7 @@ namespace adotapet.Controllers
             return View(ong);
         }
 
-        // GET: Ong/Create
-        public IActionResult Create()
+        public IActionResult Criar()
         {
             return View();
         }
@@ -53,7 +52,7 @@ namespace adotapet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Cnpj,Address,Contact")] Ong ong)
+        public async Task<IActionResult> Criar([Bind("Id,Nome,Cnpj,Endereco,Contato")] Ong ong)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +64,7 @@ namespace adotapet.Controllers
         }
 
         // GET: Ong/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Editar(int? id)
         {
             if (id == null)
             {
@@ -85,7 +84,7 @@ namespace adotapet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Cnpj,Address,Contact")] Ong ong)
+        public async Task<IActionResult> Editar(int id, [Bind("Id,Nome,Cnpj,Endereco,Contato")] Ong ong)
         {
             if (id != ong.Id)
             {
@@ -101,7 +100,7 @@ namespace adotapet.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OngExists(ong.Id))
+                    if (!OngExiste(ong.Id))
                     {
                         return NotFound();
                     }
@@ -116,7 +115,7 @@ namespace adotapet.Controllers
         }
 
         // GET: Ong/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Excluir(int? id)
         {
             if (id == null)
             {
@@ -134,9 +133,9 @@ namespace adotapet.Controllers
         }
 
         // POST: Ong/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> ExcluirConfirmar(int id)
         {
             var ong = await _context.Ong.FindAsync(id);
             _context.Ong.Remove(ong);
@@ -144,7 +143,7 @@ namespace adotapet.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool OngExists(int id)
+        private bool OngExiste(int id)
         {
             return _context.Ong.Any(e => e.Id == id);
         }
