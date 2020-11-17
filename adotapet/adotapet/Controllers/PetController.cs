@@ -54,7 +54,7 @@ namespace adotapet.Controllers
         // GET: Pet/Create
         public IActionResult Create()
         {
-            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Name");
+            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Nome");
             return View();
         }
 
@@ -116,7 +116,7 @@ namespace adotapet.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Name", pet.IdOng);
+            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Nome", pet.IdOng);
             return View(pet);
         }
 
@@ -164,7 +164,7 @@ namespace adotapet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Name", model.IdOng);
+            ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Nome", model.IdOng);
             return View(model);
         }
 

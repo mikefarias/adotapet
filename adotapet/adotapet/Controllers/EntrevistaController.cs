@@ -45,6 +45,8 @@ namespace adotapet.Controllers
         // GET: Entrevista/Create
         public IActionResult Create()
         {
+            ViewData["IdPet"] = new SelectList(_context.Pet, "Id", "Name");
+            ViewData["IdAdotante"] = new SelectList(_context.Adotante, "Id", "Nome");
             return View();
         }
 
@@ -53,7 +55,7 @@ namespace adotapet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,IdPet,IdAdotante,Data")] Entrevista entrevista)
+        public async Task<IActionResult> Create([Bind("Id,Name,Nome,Data")] Entrevista entrevista)
         {
             if (ModelState.IsValid)
             {
