@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using adotapet.Models;
 
-namespace adotapet.Models
+namespace Domain.Entidades
 {
     public class Context : DbContext
     {
