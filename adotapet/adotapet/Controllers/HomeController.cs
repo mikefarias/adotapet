@@ -9,7 +9,7 @@ using Domain.Entidades;
 using Service.Modelos;
 using Microsoft.EntityFrameworkCore;
 
-namespace adotapet.Controllers
+namespace Application.Controllers
 {
     public class HomeController : Controller
     {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Domain.Entidades;
 using Service.Modelos;
 
-namespace adotapet.Controllers
+namespace Application.Controllers
 {
     public class EntrevistaController : Controller
     {
