@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using adotapet.Models;
+using Domain.Entidades;
+using Domain.Modelos;
 
 namespace adotapet.Controllers
 {
@@ -78,20 +79,45 @@ namespace adotapet.Controllers
         }
 
         // GET: Entrevista/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? id, EntrevistaModelView model)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var entrevista = await _context.Entrevista.FindAsync(id);
-            if (entrevista == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                var entrevista = await _context.Entrevista.FindAsync(id);
+                entrevista.IdPet = model.IdPet;
+                entrevista.Pet = model.Pet;
+                entrevista.IdAdotante = model.IdAdotante;
+                entrevista.Adotante = model.Adotante;
+                entrevista.Data = model.Data;
+
+                try
+                {
+                    _context.Update(entrevista);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!EntrevistaExists(entrevista.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
             }
-            ViewData["IdPet"] = new SelectList(_context.Pet, "IdPet", "Name", entrevista.IdPet);
-            return View(entrevista);
+
+
+            ViewData["IdPet"] = new SelectList(_context.Pet, "IdPet", "Name", model.IdPet);
+            ViewData["IdAdotante"] = new SelectList(_context.Adotante, "IdAdotante", "Nome", model.IdAdotante);
+            return View(model);
         }
 
         // POST: Entrevista/Edit/5

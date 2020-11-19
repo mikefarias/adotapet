@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using adotapet.Models;
+using Domain.Entidades;
+using Domain.Modelos;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
@@ -17,7 +18,7 @@ namespace adotapet.Controllers
     {
         private readonly Context _context;
 
-        IWebHostEnvironment _appEnvironment;
+        private readonly  IWebHostEnvironment _appEnvironment;
 
         public PetController(Context context, IWebHostEnvironment env)
         {
@@ -96,10 +97,8 @@ namespace adotapet.Controllers
                 string pastaFotos = Path.Combine(_appEnvironment.WebRootPath, "img\\profile_pet");
                 nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
                 string caminhoArquivo = Path.Combine(pastaFotos, nomeUnicoArquivo);
-                using (var fileStream = new FileStream(caminhoArquivo, FileMode.Create))
-                {
-                    model.Photo.CopyTo(fileStream);
-                }
+                using var fileStream = new FileStream(caminhoArquivo, FileMode.Create);
+                model.Photo.CopyTo(fileStream);
             }
             return nomeUnicoArquivo;
         }

@@ -1,6 +1,6 @@
 using System;
 
-namespace adotapet.Models
+namespace Domain.Modelos
 {
     public class ErrorViewModel
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using adotapet.Models;
+using Domain.Entidades;
 
 namespace Domain.Entidades
 {
@@ -16,10 +16,10 @@ namespace Domain.Entidades
             optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb;Database=adotapet3;Integrated Security=True");
         }
 
-        public DbSet<adotapet.Models.Ong> Ong { get; set; }
+        public DbSet<Ong> Ong { get; set; }
 
-        public DbSet<adotapet.Models.Adotante> Adotante { get; set; }
+        public DbSet<Adotante> Adotante { get; set; }
 
-        public DbSet<adotapet.Models.Entrevista> Entrevista { get; set; }
+        public DbSet<Entrevista> Entrevista { get; set; }
     }
 }

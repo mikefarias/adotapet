@@ -10,8 +10,8 @@ using Domain.Entidades;
 namespace adotapet.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20201117025130_OngPadraoPortugues")]
-    partial class OngPadraoPortugues
+    [Migration("20201118001049_Ajustes-Entrevista")]
+    partial class AjustesEntrevista
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -61,9 +61,6 @@ namespace adotapet.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AdotanteId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Data")
                         .HasColumnType("datetime2");
 
@@ -73,14 +70,11 @@ namespace adotapet.Migrations
                     b.Property<int>("IdPet")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PetId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("AdotanteId");
+                    b.HasIndex("IdAdotante");
 
-                    b.HasIndex("PetId");
+                    b.HasIndex("IdPet");
 
                     b.ToTable("Entrevista");
                 });
@@ -151,11 +145,15 @@ namespace adotapet.Migrations
                 {
                     b.HasOne("adotapet.Models.Adotante", "Adotante")
                         .WithMany()
-                        .HasForeignKey("AdotanteId");
+                        .HasForeignKey("IdAdotante")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("adotapet.Models.Pet", "Pet")
                         .WithMany()
-                        .HasForeignKey("PetId");
+                        .HasForeignKey("IdPet")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("adotapet.Models.Pet", b =>

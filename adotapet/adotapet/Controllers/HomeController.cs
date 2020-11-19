@@ -5,7 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using adotapet.Models;
+using Domain.Entidades;
+using Domain.Modelos;
 using Microsoft.EntityFrameworkCore;
 
 namespace adotapet.Controllers
@@ -15,12 +16,9 @@ namespace adotapet.Controllers
 
         private readonly Context _context;
 
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(Context context, ILogger<HomeController> logger)
+        public HomeController(Context context)
         {
             _context = context;
-            _logger = logger;
         }
 
         public async Task<IActionResult> Index()

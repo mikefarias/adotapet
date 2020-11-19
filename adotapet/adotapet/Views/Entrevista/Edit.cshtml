@@ -1,4 +1,4 @@
-﻿@model adotapet.Models.Entrevista
+﻿@model Domain.Entidades.Entrevista
 
 @{
     ViewData["Title"] = "Edit";
@@ -15,13 +15,13 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="IdPet" class="control-label"></label>
-                <input asp-for="IdPet" class="form-control" />
-                <span asp-validation-for="IdPet" class="text-danger"></span>
+                <select asp-for="IdPet" class="form-control" asp-items="ViewBag.IdPet"></select>
+                <span asp-validation-for="Pet" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdAdotante" class="control-label"></label>
-                <input asp-for="IdAdotante" class="form-control" />
-                <span asp-validation-for="IdAdotante" class="text-danger"></span>
+                <select asp-for="IdAdotante" class="form-control" asp-items="ViewBag.IdAdotante"></select>
+                <span asp-validation-for="Adotante" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Data" class="control-label"></label>
