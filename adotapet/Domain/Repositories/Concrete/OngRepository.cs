@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositorios.Concreto
 {
-    public class OngRepositorio: BaseRepositorio<Ong> , IOngRepositorio
+    public class OngRepository: BaseRepository<Ong> , IOngRepository
     {
 
         private Context _context;
 
-        public OngRepositorio(Context context) : base(context)
+        public OngRepository(Context context) : base(context)
         {
             _context = context;
         }
 
-        OngRepositorio() : base(new Context())
+        OngRepository() : base(new Context())
         { 
         }
 

@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositorios.Concreto
 {
-    public class BaseRepositorio<TEntity> : IBaseRepositorio<TEntity> where TEntity : class
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {
 
         internal DbContext context;
         internal DbSet<TEntity> dbSet;
 
-        public BaseRepositorio(DbContext context)
+        public BaseRepository(DbContext context)
         {
             this.context = context;
             dbSet = context.Set<TEntity>();
             //this.context.Configuration.LazyLoadingEnabled = false;
         }
 
-        public BaseRepositorio() 
+        public BaseRepository() 
         { 
         }
 

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositorios.Abstrato
 {
-    public interface IBaseRepositorio<TEntity> where TEntity : class
+    public interface IBaseRepository<TEntity> where TEntity : class
     {
         /// <summary>
         /// Obtém por Id
