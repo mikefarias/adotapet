@@ -1,4 +1,6 @@
-﻿using Service.Modelos;
+﻿using Domain.Repositories.Abstract;
+using Domain.Repositories.Concrete;
+using Service.Modelos;
 using Service.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,12 @@ namespace Service
 {
     public class OngService : IOngService
     {
+        private readonly IOngRepository _ongRepository;
 
+        public OngService() 
+        {
+            _ongRepository = new OngRepository();
+        }
         public OngViewModel Adicionar(OngViewModel ongViewModel)
         {
             throw new NotImplementedException();

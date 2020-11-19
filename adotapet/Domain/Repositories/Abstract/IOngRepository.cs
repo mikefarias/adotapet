@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories.Abstract 
 { 
-    public interface IOngRepository: IBaseRepository<Ong>
+    public interface IOngRepository
     {
         /// <summary>
         /// Insere uma entity. Para salvar, utilize o método .Salvar()

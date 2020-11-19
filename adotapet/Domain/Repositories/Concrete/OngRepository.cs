@@ -7,23 +7,22 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories.Concrete
 {
-    public class OngRepository: BaseRepository<Ong> , IOngRepository
+    public class OngRepository : IOngRepository
     {
+        private readonly Context _context;
 
-        private Context _context;
+        public OngRepository()
+        {
+        }
 
-        public OngRepository(Context context) : base(context)
+        OngRepository(Context context)
         {
             _context = context;
         }
 
-        OngRepository() : base(new Context())
-        { 
-        }
-
         public void InserirOng(Ong ong)
         {
-            throw new NotImplementedException();
+           _context.Add(ong);
         }
     }
 }
