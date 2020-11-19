@@ -1,11 +1,11 @@
-﻿using Domain.Repositorios.Abstrato;
+﻿using Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Repositorios.Concreto
+namespace Domain.Repositories.Concrete
 {
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
     {

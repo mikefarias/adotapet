@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Entidades
+namespace Domain.Entities
 {
     public class Adotante
     {

@@ -1,11 +1,11 @@
-﻿using Domain.Repositorios.Abstrato;
-using Domain.Entidades;
+﻿using Domain.Repositories.Abstract;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Repositorios.Concreto
+namespace Domain.Repositories.Concrete
 {
     public class OngRepository: BaseRepository<Ong> , IOngRepository
     {

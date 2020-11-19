@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Repositorios.Abstrato
+namespace Domain.Repositories.Abstract
 {
     public interface IBaseRepository<TEntity> where TEntity : class
     {

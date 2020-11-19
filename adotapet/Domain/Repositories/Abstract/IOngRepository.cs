@@ -1,11 +1,11 @@
-﻿using Domain.Entidades;
+﻿using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Repositorios.Abstrato
-{
+namespace Domain.Repositories.Abstract 
+{ 
     public interface IOngRepository: IBaseRepository<Ong>
     {
         /// <summary>
