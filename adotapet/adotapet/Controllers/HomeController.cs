@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Domain.Entidades;
-using Domain.Modelos;
+using Service.Modelos;
 using Microsoft.EntityFrameworkCore;
 
 namespace adotapet.Controllers

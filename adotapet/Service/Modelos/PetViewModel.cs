@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Domain.Modelos
+namespace Service.Modelos
 {
     public class PetViewModel
     {
