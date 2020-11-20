@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Service.AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
 
 namespace Service
 {
@@ -16,6 +18,8 @@ namespace Service
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+            services.AddAutoMapper(typeof(ConfigurationMapper));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

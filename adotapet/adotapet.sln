@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "adotapet\App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{351695FD-78F3-460E-9B57-CA6F188F71E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{4B49505A-E825-4E0E-85F6-E9FE45EAB47C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{4B49505A-E825-4E0E-85F6-E9FE45EAB47C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

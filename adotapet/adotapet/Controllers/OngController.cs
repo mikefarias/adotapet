@@ -9,15 +9,18 @@ using Microsoft.EntityFrameworkCore;
 using Service;
 using Service.Modelos;
 using Service.Services.Interfaces;
+using AutoMapper;
 
 namespace Application.Controllers
 {
     public class OngController : Controller
     {
         private readonly IOngService _ongService;
+        private readonly IMapper _mapper;
 
-        public OngController()
+        public OngController(IMapper mapper)
         {
+            _mapper = mapper;
             _ongService = new OngService();
         }
 
