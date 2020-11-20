@@ -1,10 +1,10 @@
-﻿using Service.Modelos;
+﻿using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Service.Services.Interfaces
+namespace Service.Interfaces
 {
     public interface IOngService : IDisposable
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Domain.Entities;
-using Service.Modelos;
+using Service.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Controllers

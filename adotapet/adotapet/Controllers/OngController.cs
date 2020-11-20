@@ -6,9 +6,9 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Service;
-using Service.Modelos;
-using Service.Services.Interfaces;
+using Service.Services;
+using Service.Models;
+using Service.Interfaces;
 using AutoMapper;
 
 namespace Application.Controllers

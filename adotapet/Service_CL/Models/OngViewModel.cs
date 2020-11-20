@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Service.Modelos
+namespace Service.Models
 {
     public class OngViewModel
     {

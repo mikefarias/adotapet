@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
-using Service.Modelos;
+using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

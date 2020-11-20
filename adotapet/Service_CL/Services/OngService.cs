@@ -1,13 +1,13 @@
 ﻿using Domain.Repositories.Abstract;
 using Domain.Repositories.Concrete;
-using Service.Modelos;
-using Service.Services.Interfaces;
+using Service.Models;
+using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Service
+namespace Service.Services
 {
     public class OngService : IOngService
     {
