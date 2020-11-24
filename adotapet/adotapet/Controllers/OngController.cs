@@ -21,13 +21,14 @@ namespace Application.Controllers
         public OngController(IMapper mapper)
         {
             _mapper = mapper;
-            _ongService = new OngService();
+            _ongService = new OngService(mapper);
         }
 
         // GET: Ong
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index()      
         {
-            return View(_ongService.ObterTodos());
+            var ongs = _ongService.ObterTodos();
+            return View(ongs);
         }
 
         // GET: Ong/Details/5

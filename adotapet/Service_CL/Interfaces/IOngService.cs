@@ -14,7 +14,7 @@ namespace Service.Interfaces
 
         OngViewModel ObterPorId(int id);
 
-        OngViewModel ObterTodos();
+        IEnumerable<OngViewModel> ObterTodos();
         void Remover(int id);
 
     }

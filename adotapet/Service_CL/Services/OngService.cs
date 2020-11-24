@@ -6,16 +6,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace Service.Services
 {
+
     public class OngService : IOngService
     {
+
+        private readonly IMapper _mapper;
         private readonly IOngRepository _ongRepository;
 
-        public OngService() 
+        public OngService(IMapper mapper) 
         {
             _ongRepository = new OngRepository();
+            _mapper = mapper;
         }
         public OngViewModel Adicionar(OngViewModel ongViewModel)
         {
@@ -37,9 +42,10 @@ namespace Service.Services
             throw new NotImplementedException();
         }
 
-        public OngViewModel ObterTodos()
+        public IEnumerable<OngViewModel> ObterTodos()
         {
-            throw new NotImplementedException();
+            var ongs = _ongRepository.ObterTodos();
+            return _mapper.Map<List<OngViewModel>>(ongs);
         }
 
         public void Remover(int id)

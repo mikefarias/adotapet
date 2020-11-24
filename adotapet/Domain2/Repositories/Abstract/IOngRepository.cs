@@ -13,5 +13,7 @@ namespace Domain.Repositories.Abstract
         /// </summary>
         /// <param name="entity"></param>
         void InserirOng(Ong ong);
+
+        IEnumerable<Ong> ObterTodos();
     }
 }
