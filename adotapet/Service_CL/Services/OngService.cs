@@ -44,8 +44,7 @@ namespace Service.Services
 
         public IEnumerable<OngViewModel> ObterTodos()
         {
-            var ongs = _ongRepository.ObterTodos();
-            return _mapper.Map<List<OngViewModel>>(ongs);
+            return _mapper.Map<List<OngViewModel>>(_ongRepository.ObterTodos());
         }
 
         public void Remover(int id)

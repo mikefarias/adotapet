@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Service.AutoMapper;
+using Service.Services;
 
 namespace adotapet
 {
@@ -29,6 +30,7 @@ namespace adotapet
             services.AddControllersWithViews();
             services.AddDbContext<Context>();
             services.AddAutoMapper(typeof(ConfigurationMapper));
+            services.AddTransient<Service.Interfaces.IOngService, OngService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

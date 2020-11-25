@@ -16,12 +16,10 @@ namespace Application.Controllers
     public class OngController : Controller
     {
         private readonly IOngService _ongService;
-        private readonly IMapper _mapper;
-
-        public OngController(IMapper mapper)
+ 
+        public OngController(IOngService ongService)
         {
-            _mapper = mapper;
-            _ongService = new OngService(mapper);
+            _ongService = ongService;
         }
 
         // GET: Ong
