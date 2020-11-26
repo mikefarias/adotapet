@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain2\Domain.csproj" />
+    <ProjectReference Include="..\Infra.CrossCutting.IoC\Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\Service_CL\Service.csproj" />
   </ItemGroup>
 

@@ -22,7 +22,7 @@ namespace Domain.Repositories.Abstract
         /// </summary>
         /// <param name="includes">Includes</param>
         /// <returns>Queryable da entity</returns>
-        IQueryable<TEntity> ObterTodos(params string[] includes);
+        IEnumerable<TEntity> ObterTodos();
 
         /// <summary>
         /// Insere uma entity. Para salvar, utilize o método .Salvar()

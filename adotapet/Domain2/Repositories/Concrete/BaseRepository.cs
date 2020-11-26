@@ -17,7 +17,6 @@ namespace Domain.Repositories.Concrete
         {
             this.context = context;
             dbSet = context.Set<TEntity>();
-            //this.context.Configuration.LazyLoadingEnabled = false;
         }
 
         public BaseRepository() 
@@ -54,9 +53,9 @@ namespace Domain.Repositories.Concrete
             throw new NotImplementedException();
         }
 
-        public IQueryable<TEntity> ObterTodos(params string[] includes)
+        public IEnumerable<TEntity> ObterTodos()
         {
-            throw new NotImplementedException();
+            return dbSet.ToList();
         }
 
         public int Salvar()

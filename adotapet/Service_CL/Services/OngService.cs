@@ -17,9 +17,9 @@ namespace Service.Services
         private readonly IMapper _mapper;
         private readonly IOngRepository _ongRepository;
 
-        public OngService(IMapper mapper) 
+        public OngService(IMapper mapper, IOngRepository ongRepository) 
         {
-            _ongRepository = new OngRepository();
+            _ongRepository = ongRepository;
             _mapper = mapper;
         }
         public OngViewModel Adicionar(OngViewModel ongViewModel)

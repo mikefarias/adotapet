@@ -8,24 +8,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Repositories.Concrete
 {
-    public class OngRepository : IOngRepository
+    public class OngRepository : BaseRepository<Ong>, IOngRepository
     {
         private readonly Context _context;
         private readonly DbSet<Ong> DbSet;
-        public OngRepository()
+        public OngRepository(Context context) : base(context)
         {
-            _context = new Context();
+            _context = context;
             DbSet = _context.Set<Ong>();
         }
 
         public void InserirOng(Ong ong)
         {
            _context.Add(ong);
-        }
-
-        public IEnumerable<Ong> ObterTodos()
-        {
-            return DbSet.ToList();
         }
     }
 }
