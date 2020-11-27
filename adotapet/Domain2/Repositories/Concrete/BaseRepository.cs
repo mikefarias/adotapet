@@ -30,7 +30,7 @@ namespace Domain.Repositories.Concrete
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.SuppressFinalize(this);
         }
 
         public void Excluir(TEntity entity)
@@ -40,7 +40,8 @@ namespace Domain.Repositories.Concrete
 
         public void Inserir(TEntity entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
+            context.SaveChanges();
         }
 
         public TEntity ObterPorId(int id)

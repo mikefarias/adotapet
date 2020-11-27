@@ -8,12 +8,6 @@ namespace Domain.Repositories.Abstract
 { 
     public interface IOngRepository: IBaseRepository<Ong>
     {
-        /// <summary>
-        /// Insere uma entity. Para salvar, utilize o método .Salvar()
-        /// </summary>
-        /// <param name="entity"></param>
-        void InserirOng(Ong ong);
 
-        IEnumerable<Ong> ObterTodos();
     }
 }

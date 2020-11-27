@@ -59,16 +59,14 @@ namespace Application.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Criar([Bind("Id,Nome,Cnpj,Endereco,Contato")] Ong ong)
+        public async Task<IActionResult> Criar(OngViewModel ong)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _context.Add(ong);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //return View(ong);
-            return NotFound();
+            if (ModelState.IsValid)
+            {
+                _ongService.Adicionar(ong);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(ong);
         }
 
         // GET: Ong/Edit/5

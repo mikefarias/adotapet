@@ -8,7 +8,7 @@ namespace Service.Interfaces
 {
     public interface IOngService : IDisposable
     {
-        OngViewModel Adicionar(OngViewModel ongViewModel);
+        void Adicionar(OngViewModel ongViewModel);
 
         OngViewModel Atualizar(OngViewModel ongViewModel);
 

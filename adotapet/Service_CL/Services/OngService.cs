@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Domain.Entities;
 
 namespace Service.Services
 {
@@ -22,9 +23,10 @@ namespace Service.Services
             _ongRepository = ongRepository;
             _mapper = mapper;
         }
-        public OngViewModel Adicionar(OngViewModel ongViewModel)
+        public void Adicionar(OngViewModel ongViewModel)
         {
-            throw new NotImplementedException();
+            Ong ong = _mapper.Map<Ong>(ongViewModel);
+             _ongRepository.Inserir(ong );
         }
 
         public OngViewModel Atualizar(OngViewModel ongViewModel)
@@ -34,7 +36,7 @@ namespace Service.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.SuppressFinalize(this);
         }
 
         public OngViewModel ObterPorId(int id)

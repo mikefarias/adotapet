@@ -17,10 +17,5 @@ namespace Domain.Repositories.Concrete
             _context = context;
             DbSet = _context.Set<Ong>();
         }
-
-        public void InserirOng(Ong ong)
-        {
-           _context.Add(ong);
-        }
     }
 }
