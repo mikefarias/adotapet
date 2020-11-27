@@ -30,23 +30,18 @@ namespace Application.Controllers
         }
 
         // GET: Ong/Details/5
-        public async Task<IActionResult> Detalhes(int? id)
+        public async Task<IActionResult> Detalhes(int id)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //var ong = await _context.Ong
-            //    .FirstOrDefaultAsync(m => m.Id == id);
-            //if (ong == null)
-            //{
-            //    return NotFound();
-            //}
-
-            //return View(ong);
-
-            return NotFound();
+            if (id == 0)
+            {
+                return NotFound();
+            }
+            var ong = _ongService.ObterPorId(id);
+            if (ong == null)
+            {
+                return NotFound();
+            }
+            return View(ong);
         }
 
         public IActionResult Criar()

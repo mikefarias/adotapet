@@ -46,7 +46,7 @@ namespace Domain.Repositories.Concrete
 
         public TEntity ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return dbSet.Find(id);
         }
 
         public TEntity ObterPorId(int id, List<string> includes)

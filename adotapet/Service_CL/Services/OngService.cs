@@ -41,7 +41,7 @@ namespace Service.Services
 
         public OngViewModel ObterPorId(int id)
         {
-            throw new NotImplementedException();
+            return _mapper.Map<OngViewModel>(_ongRepository.ObterPorId(id));
         }
 
         public IEnumerable<OngViewModel> ObterTodos()
