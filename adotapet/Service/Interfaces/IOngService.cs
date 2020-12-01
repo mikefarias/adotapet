@@ -1,20 +1,21 @@
-﻿using Service.Modelos;
+﻿using Service.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Service.Services.Interfaces
+namespace Service.Interfaces
 {
     public interface IOngService : IDisposable
     {
-        OngViewModel Adicionar(OngViewModel ongViewModel);
+        void Adicionar(OngViewModel ongViewModel);
 
         OngViewModel Atualizar(OngViewModel ongViewModel);
 
         OngViewModel ObterPorId(int id);
 
-        OngViewModel ObterTodos();
+        IEnumerable<OngViewModel> ObterTodos();
+
         void Remover(int id);
 
     }
