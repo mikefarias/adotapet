@@ -1,67 +1,65 @@
-﻿using Domain.Repositories.Abstract;
+﻿using Domain.Entities;
+using Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Domain.Repositories.Concrete
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class
+    public class BaseRepository<T> : IBaseRepository<T> where T : class
     {
-
-        internal DbContext context;
-        internal DbSet<TEntity> dbSet;
+        private readonly DbContext _context;
+        private readonly DbSet<T> dbSet;
 
         public BaseRepository(DbContext context)
         {
-            this.context = context;
-            dbSet = context.Set<TEntity>();
+            _context = context;
+            dbSet = context.Set<T>();
         }
 
         public BaseRepository() 
-        { 
-        }
-
-        public void Alterar(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
-
-        public void Excluir(TEntity entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Inserir(TEntity entity)
-        {
-            dbSet.Add(entity);
-            context.SaveChanges();
-        }
-
-        public TEntity ObterPorId(int id)
+        public T ObterPorId(int id)
         {
             return dbSet.Find(id);
         }
 
-        public TEntity ObterPorId(int id, List<string> includes)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TEntity> ObterTodos()
+        public IEnumerable<T> ObterTodos()
         {
             return dbSet.ToList();
         }
 
-        public int Salvar()
+        public T Inserir(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
+            return _context.SaveChanges() == 1 ? entity : null;
+        }
+
+        public T Alterar(T entity)
+        {
+            return Salvar(entity);
+        }
+
+        public void Excluir(T entity)
+        {
+            dbSet.Remove(entity);
+            _context.SaveChanges();
+        }
+
+        public T Salvar(T entity)
+        {
+            dbSet.Update(entity);
+            return _context.SaveChanges() == 1 ? entity : null;
+        }
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this); ;
         }
     }
 }

@@ -5,45 +5,42 @@ using System.Threading.Tasks;
 
 namespace Domain.Repositories.Abstract
 {
-    public interface IBaseRepository<TEntity> where TEntity : class
+    public interface IBaseRepository<T>
     {
         /// <summary>
         /// Obtém por Id
         /// </summary>
         /// <param name="id">Chave principal</param>
         /// <returns></returns>
-        TEntity ObterPorId(int id);
-
-
-        TEntity ObterPorId(int id, List<string> includes);
+        T ObterPorId(int id);
 
         /// <summary>
         /// Obtém todos com os includes listados
         /// </summary>
         /// <param name="includes">Includes</param>
         /// <returns>Queryable da entity</returns>
-        IEnumerable<TEntity> ObterTodos();
+        IEnumerable<T> ObterTodos();
 
         /// <summary>
         /// Insere uma entity. Para salvar, utilize o método .Salvar()
         /// </summary>
         /// <param name="entity"></param>
-        void Inserir(TEntity entity);
+        T Inserir(T entity);
         /// <summary>
         /// Altera uma entity. Para salvar, utilize o método .Salvar()
         /// </summary>
         /// <param name="entity"></param>
-        void Alterar(TEntity entity);
+        T Alterar(T entity);
         /// <summary>
         /// Exclui uma entity. Para salvar, utilize o método .Salvar()
         /// </summary>
         /// <param name="entity"></param>
-        void Excluir(TEntity entity);
+        void Excluir(T entity);
         /// <summary>
         /// Método que salva todas as inserções/alterações/exclusões
         /// </summary>
         /// <returns></returns>
-        int Salvar();
+        T Salvar(T entity);
 
         void Dispose();
     }

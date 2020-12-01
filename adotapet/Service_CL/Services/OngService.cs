@@ -31,7 +31,9 @@ namespace Service.Services
 
         public OngViewModel Atualizar(OngViewModel ongViewModel)
         {
-            throw new NotImplementedException();
+            var ong = _ongRepository.Alterar(_mapper.Map<Ong>(ongViewModel));
+
+            return _mapper.Map<OngViewModel>(ong);
         }
 
         public void Dispose()
@@ -51,7 +53,8 @@ namespace Service.Services
 
         public void Remover(int id)
         {
-            throw new NotImplementedException();
+            Ong ong = _ongRepository.ObterPorId(id);
+            _ongRepository.Excluir(ong);
         }
     }
 }
