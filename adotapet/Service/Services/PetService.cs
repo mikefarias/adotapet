@@ -48,7 +48,7 @@ namespace Service.Services
 
         public IEnumerable<PetViewModel> ObterTodos()
         {
-            return _mapper.Map<List<PetViewModel>>(_petRepository.ObterT odos());
+            return _mapper.Map<List<PetViewModel>>(_petRepository.ObterTodos());
         }
 
         public void Remover(int id)
