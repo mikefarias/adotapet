@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Domain.Entities.Pet>
+﻿@model IEnumerable<Service.Models.PetViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +7,7 @@
 <h1>Início</h1>
 
 <p>
-    <a asp-action="Create">Cadastrar Pet</a>
+    <a asp-action="Criar">Cadastrar Pet</a>
 </p>
 <table class="table">
     <thead>
@@ -31,9 +31,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Weight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsAdopted)
             </th>
             <th></th>
         </tr>
@@ -70,12 +67,9 @@
                 @Html.DisplayFor(modelItem => item.Weight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsAdopted)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Excluir</a>
+                <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |
+                <a asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a> |
+                <a asp-action="Excluir" asp-route-id="@item.Id">Excluir</a>
             </td>
         </tr>
 }

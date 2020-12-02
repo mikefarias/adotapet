@@ -17,7 +17,11 @@ namespace Infra.CrossCutting.IoC
 
             // Services
             services.AddTransient<IOngService, OngService>();
+            services.AddTransient<IPetService, PetService>();
+
+            // Repositories
             services.AddTransient<IOngRepository, OngRepository>();
+            services.AddTransient<IPetRepository, PetRepository>();
             services.AddMemoryCache();
 
         }

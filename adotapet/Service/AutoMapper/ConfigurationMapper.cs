@@ -13,6 +13,7 @@ namespace Service.AutoMapper
         public ConfigurationMapper()
         {
             CreateMap<Ong, OngViewModel>().ReverseMap();
+            CreateMap<Pet, PetViewModel>().ReverseMap();
         }
 
     }

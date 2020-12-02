@@ -21,7 +21,6 @@ namespace Domain.Repositories.Concrete
 
         public BaseRepository() 
         {
-            throw new NotImplementedException();
         }
 
         public T ObterPorId(int id)
