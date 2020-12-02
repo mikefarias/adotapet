@@ -22,13 +22,13 @@ namespace Application.Controllers
             _ongService = ongService;
         }
 
-        public async Task<IActionResult> Index()      
+        public IActionResult Index()      
         {
             var ongs = _ongService.ObterTodos();
             return View(ongs);
         }
 
-        public async Task<IActionResult> Detalhes(int id)
+        public IActionResult Detalhes(int id)
         {
             if (id == 0)
             {
@@ -49,7 +49,7 @@ namespace Application.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Criar(OngViewModel ong)
+        public IActionResult Criar(OngViewModel ong)
         {
             if (ModelState.IsValid)
             {
@@ -59,13 +59,8 @@ namespace Application.Controllers
             return View(ong);
         }
 
-        public async Task<IActionResult> Editar(int id)
+        public IActionResult Editar(int id)
         {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
             var ong = _ongService.ObterPorId(id);
             if (ong == null)
             {
@@ -77,7 +72,7 @@ namespace Application.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Editar(int id, OngViewModel ong)
+        public IActionResult Editar(int id, OngViewModel ong)
         {
             if (id != ong.Id)
             {
@@ -92,21 +87,14 @@ namespace Application.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OngExiste(ong.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(ong);
         }
 
-        public async Task<IActionResult> Excluir(int id)
+        public IActionResult Excluir(int id)
         {
            var ong =  _ongService.ObterPorId(id);
 
@@ -115,16 +103,10 @@ namespace Application.Controllers
 
         [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExcluirConfirmar(int id)
+        public IActionResult ExcluirConfirmar(int id)
         {
             _ongService.Remover(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool OngExiste(int id)
-        {
-            //return _context.Ong.Any(e => e.Id == id);
-            return false;
         }
     }
 }
