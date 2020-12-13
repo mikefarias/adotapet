@@ -18,17 +18,19 @@ namespace Application.Controllers
     public class PetController : Controller
     {
         private readonly IPetService _petService;
-        private readonly  IWebHostEnvironment _appEnvironment;
+        private readonly IOngService _ongService;
+        private readonly IWebHostEnvironment _appEnvironment;
 
-        public PetController(IPetService petService, IWebHostEnvironment env)
+        public PetController(IPetService petService, IOngService ongService, IWebHostEnvironment env)
         {
-            _petService = petService;    
+            _petService = petService;
+            _ongService = ongService;
             _appEnvironment = env;
         }
 
         public IActionResult Index()
         {
-             return View(_petService.ObterTodos());
+            return View(_petService.ObterTodos());
         }
 
         public IActionResult Detalhes(int id)
@@ -43,6 +45,7 @@ namespace Application.Controllers
 
         public IActionResult Criar()
         {
+            ViewData["IdOng"] = new SelectList(_ongService.ObterTodos(), "Id", "Nome");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace Application.Controllers
             if (ModelState.IsValid)
             {
                 string nomeUnicoArquivo = UploadedFile(model);
-                //model.Photo = nomeUnicoArquivo;
+                model.Photo = nomeUnicoArquivo;
 
                 _petService.Adicionar(model);    
                 return RedirectToAction(nameof(Index));
@@ -65,13 +68,13 @@ namespace Application.Controllers
         {
             string nomeUnicoArquivo = null;
 
-            if (model.Photo != null)
+            if (model.FilePhoto != null)
             {
                 string pastaFotos = Path.Combine(_appEnvironment.WebRootPath, "img\\profile_pet");
-                nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+                nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + model.FilePhoto.FileName;
                 string caminhoArquivo = Path.Combine(pastaFotos, nomeUnicoArquivo);
                 using var fileStream = new FileStream(caminhoArquivo, FileMode.Create);
-                model.Photo.CopyTo(fileStream);
+                model.FilePhoto.CopyTo(fileStream);
             }
             return nomeUnicoArquivo;
         }
@@ -83,7 +86,7 @@ namespace Application.Controllers
             {
                 return NotFound();
             }
-//            ViewData["IdOng"] = new SelectList( "Id", "Nome", pet.IdOng);
+            ViewData["IdOng"] = new SelectList(_ongService.ObterTodos(), "Id", "Nome");
             return View(pet);
         }
 
@@ -131,6 +134,5 @@ namespace Application.Controllers
             _petService.Remover(id);
             return RedirectToAction(nameof(Index));
         }
-
     }
 }

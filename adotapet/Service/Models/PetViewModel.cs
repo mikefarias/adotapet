@@ -14,7 +14,9 @@ namespace Service.Models
 
         public string Abstract { get; set; }
 
-        public IFormFile Photo { get; set; }
+        public string Photo { get; set; }
+
+        public IFormFile FilePhoto { get; set; }
 
         public string DateOfBirth { get; set; }
 
