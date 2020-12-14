@@ -6,73 +6,55 @@ using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Service.Interfaces;
+using Service.Models;
 
 namespace Application.Controllers
 {
     public class AdotanteController : Controller
     {
-        private readonly Context _context;
+        private readonly IAdotanteService _adotanteService;
 
-        public AdotanteController(Context context)
+        public AdotanteController(IAdotanteService adotanteService)
         {
-            _context = context;
+            _adotanteService = adotanteService;
         }
 
-        // GET: Adotante
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Adotante.ToListAsync());
+            return View(_adotanteService.ObterTodos());
         }
 
-        // GET: Adotante/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Detalhes(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var adotante = await _context.Adotante
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var adotante = _adotanteService.ObterPorId(id);
             if (adotante == null)
             {
                 return NotFound();
             }
-
             return View(adotante);
         }
 
-        // GET: Adotante/Create
-        public IActionResult Create()
+        public IActionResult Criar()
         {
             return View();
         }
 
-        // POST: Adotante/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,DataNascimento,RG,CPF,Endereco,Profissao,Celular")] Adotante adotante)
+        public IActionResult Criar(AdotanteViewModel adotante)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(adotante);
-                await _context.SaveChangesAsync();
+                _adotanteService.Adicionar(adotante);    
                 return RedirectToAction(nameof(Index));
             }
             return View(adotante);
         }
 
-        // GET: Adotante/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Editar(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var adotante = await _context.Adotante.FindAsync(id);
+            var adotante = _adotanteService.ObterPorId(id);
             if (adotante == null)
             {
                 return NotFound();
@@ -80,12 +62,9 @@ namespace Application.Controllers
             return View(adotante);
         }
 
-        // POST: Adotante/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,DataNascimento,RG,CPF,Endereco,Profissao,Celular")] Adotante adotante)
+        public IActionResult Editar(int id, AdotanteViewModel adotante)
         {
             if (id != adotante.Id)
             {
@@ -96,57 +75,29 @@ namespace Application.Controllers
             {
                 try
                 {
-                    _context.Update(adotante);
-                    await _context.SaveChangesAsync();
+                    _adotanteService.Atualizar(adotante);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AdotanteExists(adotante.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(adotante);
         }
 
-        // GET: Adotante/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Excluir(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var adotante = await _context.Adotante
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (adotante == null)
-            {
-                return NotFound();
-            }
-
+            var adotante = _adotanteService.ObterPorId(id);
             return View(adotante);
         }
 
-        // POST: Adotante/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("Excluir")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult ExcluirConfirmar(int id)
         {
-            var adotante = await _context.Adotante.FindAsync(id);
-            _context.Adotante.Remove(adotante);
-            await _context.SaveChangesAsync();
+            _adotanteService.Remover(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool AdotanteExists(int id)
-        {
-            return _context.Adotante.Any(e => e.Id == id);
         }
     }
 }
