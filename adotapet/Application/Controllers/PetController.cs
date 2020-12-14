@@ -56,7 +56,7 @@ namespace Application.Controllers
             if (ModelState.IsValid)
             {
                 string nomeUnicoArquivo = UploadedFile(model);
-                model.Photo = nomeUnicoArquivo;
+                model.Foto = nomeUnicoArquivo;
 
                 _petService.Adicionar(model);    
                 return RedirectToAction(nameof(Index));
@@ -68,13 +68,13 @@ namespace Application.Controllers
         {
             string nomeUnicoArquivo = null;
 
-            if (model.FilePhoto != null)
+            if (model.ArquivoFoto != null)
             {
                 string pastaFotos = Path.Combine(_appEnvironment.WebRootPath, "img\\profile_pet");
-                nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + model.FilePhoto.FileName;
+                nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + model.ArquivoFoto.FileName;
                 string caminhoArquivo = Path.Combine(pastaFotos, nomeUnicoArquivo);
                 using var fileStream = new FileStream(caminhoArquivo, FileMode.Create);
-                model.FilePhoto.CopyTo(fileStream);
+                model.ArquivoFoto.CopyTo(fileStream);
             }
             return nomeUnicoArquivo;
         }

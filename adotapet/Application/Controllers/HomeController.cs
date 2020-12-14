@@ -8,22 +8,23 @@ using Microsoft.Extensions.Logging;
 using Domain.Entities;
 using Service.Models;
 using Microsoft.EntityFrameworkCore;
+using Service.Interfaces;
 
 namespace Application.Controllers
 {
     public class HomeController : Controller
     {
 
-        private readonly Context _context;
+        private readonly IPetService _petService;
 
-        public HomeController(Context context)
+        public HomeController(IPetService petService)
         {
-            _context = context;
+            _petService = petService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Pet.ToListAsync());
+            return View( _petService.ObterTodos());
         }
 
         public IActionResult Ong()

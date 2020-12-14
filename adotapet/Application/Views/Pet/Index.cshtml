@@ -15,22 +15,22 @@
             <th>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Abstract)
+                @Html.DisplayNameFor(model => model.Resumo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateOfBirth)
+                @Html.DisplayNameFor(model => model.DataNascimento)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Breed)
+                @Html.DisplayNameFor(model => model.Raca)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Ong)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Weight)
+                @Html.DisplayNameFor(model => model.Peso)
             </th>
             <th></th>
         </tr>
@@ -39,9 +39,9 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @if (@item.Photo != null)
+                @if (@item.Foto != null)
                 {
-                    <img src="~/img/profile_pet/@item.Photo" alt="@item.Photo" class="rounded-circle" height="40" width="40" asp-append-version="true">
+                    <img src="~/img/profile_pet/@item.Foto" alt="@item.Foto" class="rounded-circle" height="40" width="40" asp-append-version="true">
                 }
                 else
                 {
@@ -49,22 +49,22 @@
                 }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Abstract)
+                @Html.DisplayFor(modelItem => item.Resumo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DateOfBirth)
+                @Html.DisplayFor(modelItem => item.DataNascimento)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Breed)
+                @Html.DisplayFor(modelItem => item.Raca)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Ong.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Weight)
+                @Html.DisplayFor(modelItem => item.Peso)
             </td>
             <td>
                 <a asp-action="Editar" asp-route-id="@item.Id">Editar</a> |

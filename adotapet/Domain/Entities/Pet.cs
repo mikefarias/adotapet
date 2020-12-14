@@ -12,19 +12,19 @@ namespace Domain.Entities
         public int Id { get; set; }
 
         [DisplayName("Nome")]
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
         [DisplayName("Resumo")]
-        public string Abstract { get; set; }
+        public string Resumo { get; set; }
 
         [DisplayName("Foto")]
-        public String Photo { get; set; }
+        public String Foto { get; set; }
 
         [DisplayName("Data de Nascimento")]
-        public string DateOfBirth { get; set; }
+        public string DataNascimento { get; set; }
 
         [DisplayName("Raça")]
-        public string Breed { get; set; }
+        public string Raca { get; set; }
 
         [DisplayName("Ong")]
         [ForeignKey("Ong")]
@@ -32,9 +32,9 @@ namespace Domain.Entities
         public virtual Ong Ong { get; set; }
 
         [DisplayName("Peso")]
-        public double Weight { get; set; }
+        public double Peso { get; set; }
 
         [DisplayName("É Adotado? ")]
-        public bool IsAdopted { get; set; }
+        public bool Adotado { get; set; }
     }
 }

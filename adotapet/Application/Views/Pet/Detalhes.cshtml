@@ -1,4 +1,4 @@
-﻿@model Domain.Entities.Pet
+﻿@model Service.Models.PetViewModel
 
 @{
     ViewData["Title"] = "Detalhes";
@@ -11,12 +11,12 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Photo)
+            @Html.DisplayNameFor(model => model.Foto)
         </dt>
         <dd class="col-sm-10">
-            @if (@Html.DisplayFor(model => model.Photo) != null)
+            @if (@Html.DisplayFor(model => model.Foto) != null)
             {
-                <img src="~/img/profile_pet/@Html.DisplayFor(model => model.Photo)" alt="@Html.DisplayFor(model => model.Photo)" class="rounded-circle" height="40" width="40">
+                <img src="~/img/profile_pet/@Html.DisplayFor(model => model.Foto)" alt="@Html.DisplayFor(model => model.Foto)" class="rounded-circle" height="40" width="40">
             }
             else
             {
@@ -24,28 +24,28 @@
             }
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.Nome)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.Nome)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Abstract)
+            @Html.DisplayNameFor(model => model.Resumo)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Abstract)
+            @Html.DisplayFor(model => model.Resumo)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DateOfBirth)
+            @Html.DisplayNameFor(model => model.DataNascimento)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateOfBirth)
+            @Html.DisplayFor(model => model.DataNascimento)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Breed)
+            @Html.DisplayNameFor(model => model.Raca)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Breed)
+            @Html.DisplayFor(model => model.Raca)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Ong)
@@ -54,16 +54,16 @@
             @Html.DisplayFor(model => model.Ong.Nome)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Weight)
+            @Html.DisplayNameFor(model => model.Peso)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Weight)
+            @Html.DisplayFor(model => model.Peso)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IsAdopted)
+            @Html.DisplayNameFor(model => model.Adotado)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IsAdopted)
+            @Html.DisplayFor(model => model.Adotado)
         </dd>
     </dl>
 </div>

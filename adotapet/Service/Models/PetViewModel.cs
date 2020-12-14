@@ -10,22 +10,24 @@ namespace Service.Models
     public class PetViewModel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Nome { get; set; }
 
-        public string Abstract { get; set; }
+        public string Resumo { get; set; }
 
-        public string Photo { get; set; }
+        public string Foto { get; set; }
 
-        public IFormFile FilePhoto { get; set; }
+        public IFormFile ArquivoFoto { get; set; }
 
-        public string DateOfBirth { get; set; }
+        public string DataNascimento { get; set; }
 
-        public string Breed { get; set; }
+        public string Raca { get; set; }
 
         public int IdOng { get; set; }
         public virtual Ong Ong { get; set; }
 
-        public double Weight { get; set; }
+        public double Peso { get; set; }
+
+        public bool Adotado { get; set; }
 
     }
 }

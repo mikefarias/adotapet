@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Domain.Entities.Pet>
+﻿@model IEnumerable<Service.Models.PetViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,10 +12,10 @@
                 @foreach (var item in Model)
                  {
                 <div class="card mb-3" style="width: 18rem;">
-                    @if (item.Photo != null)
+                    @if (item.Foto != null)
                     {
                         <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Pet">
-                            <img class="card-img-top" src="~/img/profile_pet/@item.Photo" alt="@item.Photo">
+                            <img class="card-img-top" src="~/img/profile_pet/@item.Foto" alt="@item.Foto">
                         </a>
                     }
                     else

@@ -13,41 +13,41 @@
         <form method="post" enctype="multipart/form-data" asp-action="Criar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Abstract" class="control-label"></label>
-                <input asp-for="Abstract" class="form-control" />
-                <span asp-validation-for="Abstract" class="text-danger"></span>
+                <label asp-for="Resumo" class="control-label"></label>
+                <input asp-for="Resumo" class="form-control" />
+                <span asp-validation-for="Resumo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FilePhoto" class="control-label"></label>
+                <label asp-for="ArquivoFoto" class="control-label"></label>
                 <div class="custom-file">
-                    <input asp-for="FilePhoto" class="custom-file-input" type="file" id="customFile">
+                    <input asp-for="ArquivoFoto" class="custom-file-input" type="file" id="customFile">
                     <label class="custom-file-label" for="customFile">Escolha a imagem</label>
                 </div>
-                <span asp-validation-for="FilePhoto" class="text-danger"></span>
+                <span asp-validation-for="ArquivoFoto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DateOfBirth" class="control-label"></label>
-                <input asp-for="DateOfBirth" class="form-control" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                <label asp-for="DataNascimento" class="control-label"></label>
+                <input asp-for="DataNascimento" class="form-control" />
+                <span asp-validation-for="DataNascimento" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Breed" class="control-label"></label>
-                <input asp-for="Breed" class="form-control" />
-                <span asp-validation-for="Breed" class="text-danger"></span>
+                <label asp-for="Raca" class="control-label"></label>
+                <input asp-for="Raca" class="form-control" />
+                <span asp-validation-for="Raca" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="IdOng" class="control-label"></label>
                 <select asp-for="IdOng" class="form-control" asp-items="ViewBag.IdOng"></select>
             </div>
             <div class="form-group">
-                <label asp-for="Weight" class="control-label"></label>
-                <input asp-for="Weight" class="form-control" />
-                <span asp-validation-for="Weight" class="text-danger"></span>
+                <label asp-for="Peso" class="control-label"></label>
+                <input asp-for="Peso" class="form-control" />
+                <span asp-validation-for="Peso" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Criar" class="btn btn-primary" />
