@@ -15,6 +15,7 @@ namespace Service.AutoMapper
             CreateMap<Ong, OngViewModel>().ReverseMap();
             CreateMap<Pet, PetViewModel>().ReverseMap();
             CreateMap<Adotante, AdotanteViewModel>().ReverseMap();
+            CreateMap<Entrevista, EntrevistaViewModel>().ReverseMap();
         }
 
     }

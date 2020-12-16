@@ -64,17 +64,17 @@ namespace Application.Controllers
             return View(model);
         }
 
-        private string UploadedFile(PetViewModel model)
+        private string UploadedFile(PetViewModel pet)
         {
             string nomeUnicoArquivo = null;
 
-            if (model.ArquivoFoto != null)
+            if (pet.ArquivoFoto != null)
             {
                 string pastaFotos = Path.Combine(_appEnvironment.WebRootPath, "img\\profile_pet");
-                nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + model.ArquivoFoto.FileName;
+                nomeUnicoArquivo = Guid.NewGuid().ToString() + "_" + pet.ArquivoFoto.FileName;
                 string caminhoArquivo = Path.Combine(pastaFotos, nomeUnicoArquivo);
                 using var fileStream = new FileStream(caminhoArquivo, FileMode.Create);
-                model.ArquivoFoto.CopyTo(fileStream);
+                pet.ArquivoFoto.CopyTo(fileStream);
             }
             return nomeUnicoArquivo;
         }
@@ -113,7 +113,6 @@ namespace Application.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["IdOng"] = new SelectList(_context.Ong, "Id", "Nome", model.IdOng);
             return View(model);
         }
 

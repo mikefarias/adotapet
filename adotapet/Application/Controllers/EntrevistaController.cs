@@ -5,125 +5,73 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 using Service.Models;
+using AutoMapper;
+using Service.Interfaces;
 
 namespace Application.Controllers
 {
     public class EntrevistaController : Controller
     {
-        private readonly Context _context;
+        private readonly IEntrevistaService _entrevistaService;
+        private readonly IPetService _petService;
+        private readonly IAdotanteService _adotanteService;
 
-        public EntrevistaController(Context context)
+        public EntrevistaController(IEntrevistaService entrevistaService, IPetService petService, IAdotanteService adotanteService)
         {
-            _context = context;
+            _entrevistaService = entrevistaService;
+            _petService = petService;
+            _adotanteService = adotanteService;
         }
 
-        // GET: Entrevista
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var context = _context.Entrevista.
-                Include(p => p.Pet).
-                Include(p => p.Adotante);
-             return View(await context.ToListAsync());
+            return View(_entrevistaService.ObterTodos());
         }
 
-        // GET: Entrevista/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Detalhes(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var entrevista = await _context.Entrevista
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var entrevista = _entrevistaService.ObterPorId(id);
             if (entrevista == null)
             {
                 return NotFound();
             }
-
             return View(entrevista);
         }
 
-        // GET: Entrevista/Create
-        public IActionResult Create()
+        public IActionResult Criar()
         {
-            ViewData["IdPet"] = new SelectList(_context.Pet, "Id", "Name");
-            ViewData["IdAdotante"] = new SelectList(_context.Adotante, "Id", "Nome");
+            ViewData["IdPet"] = new SelectList(_petService.ObterTodos(), "Id", "Nome");
+            ViewData["IdAdotante"] = new SelectList(_adotanteService.ObterTodos(), "Id", "Nome");
             return View();
         }
 
-        // POST: Entrevista/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(EntrevistaModelView model)
+        public IActionResult Criar(EntrevistaViewModel entrevista)
         {
             if (ModelState.IsValid)
             {
-                Entrevista entrevista = new Entrevista
-                {
-                    Pet = model.Pet,
-                    IdPet = model.IdPet,
-                    Adotante = model.Adotante,
-                    IdAdotante = model.IdAdotante,
-                    Data = model.Data
-                };
-                _context.Add(entrevista);
-                await _context.SaveChangesAsync();
+                _entrevistaService.Adicionar(entrevista);
                 return RedirectToAction(nameof(Index));
             }
-            return View(model);
+            return View(entrevista);
         }
 
-        // GET: Entrevista/Edit/5
-        public async Task<IActionResult> Edit(int? id, EntrevistaModelView model)
+        public IActionResult Editar(int id)
         {
-            if (id == null)
+            var entrevista = _entrevistaService.ObterPorId(id);
+            if (entrevista == null)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
-                var entrevista = await _context.Entrevista.FindAsync(id);
-                entrevista.IdPet = model.IdPet;
-                entrevista.Pet = model.Pet;
-                entrevista.IdAdotante = model.IdAdotante;
-                entrevista.Adotante = model.Adotante;
-                entrevista.Data = model.Data;
-
-                try
-                {
-                    _context.Update(entrevista);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EntrevistaExists(entrevista.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-
-
-            ViewData["IdPet"] = new SelectList(_context.Pet, "IdPet", "Name", model.IdPet);
-            ViewData["IdAdotante"] = new SelectList(_context.Adotante, "IdAdotante", "Nome", model.IdAdotante);
-            return View(model);
+            ViewData["IdPet"] = new SelectList(_petService.ObterTodos(), "IdPet", "Nome", entrevista.IdPet);
+            ViewData["IdAdotante"] = new SelectList(_adotanteService.ObterTodos(), "IdAdotante", "Nome", entrevista.IdAdotante);
+            return View(entrevista);
         }
 
-        // POST: Entrevista/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,IdPet,IdAdotante,Data")] Entrevista entrevista)
+        public IActionResult Editar(int id, EntrevistaViewModel entrevista)
         {
             if (id != entrevista.Id)
             {
@@ -134,35 +82,21 @@ namespace Application.Controllers
             {
                 try
                 {
-                    _context.Update(entrevista);
-                    await _context.SaveChangesAsync();
+                    _entrevistaService.Atualizar(entrevista);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EntrevistaExists(entrevista.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                    throw;
                 }
                 return RedirectToAction(nameof(Index));
             }
             return View(entrevista);
         }
 
-        // GET: Entrevista/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Excluir(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var entrevista = await _context.Entrevista
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var entrevista = _entrevistaService.ObterPorId(id);
             if (entrevista == null)
             {
                 return NotFound();
@@ -171,20 +105,12 @@ namespace Application.Controllers
             return View(entrevista);
         }
 
-        // POST: Entrevista/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult ExcluirConfirmar(int id)
         {
-            var entrevista = await _context.Entrevista.FindAsync(id);
-            _context.Entrevista.Remove(entrevista);
-            await _context.SaveChangesAsync();
+            _entrevistaService.Remover(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool EntrevistaExists(int id)
-        {
-            return _context.Entrevista.Any(e => e.Id == id);
         }
     }
 }

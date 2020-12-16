@@ -8,14 +8,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Repositories.Concrete
 {
-    public class AdotanteRepository : BaseRepository<Adotante>, IAdotanteRepository
+    public class EntrevistaRepository : BaseRepository<Entrevista>, IEntrevistaRepository
     {
         private readonly Context _context;
-        private readonly DbSet<Adotante> DbSet;
-        public AdotanteRepository(Context context) : base(context)
+        private readonly DbSet<Ong> DbSet;
+        public EntrevistaRepository(Context context) : base(context)
         {
             _context = context;
-            DbSet = _context.Set<Adotante>();
+            DbSet = _context.Set<Ong>();
         }
     }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Service.Models
 {
-    public class EntrevistaModelView
+    public class EntrevistaViewModel
     {
+        public int Id { get; set; }
+
         public int IdPet { get; set; }
         public virtual Pet Pet { get; set; }
 
