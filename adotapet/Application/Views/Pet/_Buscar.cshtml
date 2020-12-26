@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Service.Models.PetViewModel>
+<section>
+    <div class="row" style="margin-top: 20px">
+        <p>
+            <label>
+                Pesquisa:
+                <input type="text" name="q" />
+            </label>
+        </p>
+        <p><input type="submit" value="Pesquisar" class="btn btn-primary" asp-action="Buscar" asp-controller="Pet" /></p>
+    </div>
+</section>
+
+@if (Model != null)
+{
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>@Html.DisplayFor(modelItem => item.Nome)</li>
+        }
+    </ul>
+}

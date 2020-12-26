@@ -17,5 +17,10 @@ namespace Domain.Repositories.Concrete
             _context = context;
             _dbSet = _context.Set<Pet>();
         }
+
+        public IEnumerable<Pet> ObterPetsPorPalavraChave(string palavraChave)
+        {
+            return _dbSet.ToList().Where(x => x.Nome.Contains(palavraChave) || x.Resumo.Contains(palavraChave));
+        }
     }
 }

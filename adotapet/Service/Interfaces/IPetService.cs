@@ -16,6 +16,8 @@ namespace Service.Interfaces
 
         IEnumerable<PetViewModel> ObterTodos();
 
+        IEnumerable<PetViewModel> ObterPetsPorPalavraChave(string palavraChave);
+
         void Remover(int id);
 
     }

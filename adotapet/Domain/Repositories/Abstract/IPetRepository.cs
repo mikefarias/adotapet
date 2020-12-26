@@ -8,6 +8,7 @@ namespace Domain.Repositories.Abstract
 { 
     public interface IPetRepository: IBaseRepository<Pet>
     {
+        IEnumerable<Pet> ObterPetsPorPalavraChave(string palavraChave);
 
     }
 }

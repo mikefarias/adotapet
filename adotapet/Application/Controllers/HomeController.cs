@@ -22,8 +22,11 @@ namespace Application.Controllers
             _petService = petService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string palavraChave)
         {
+            if (palavraChave != null) {
+                return View(_petService.ObterPetsPorPalavraChave(palavraChave));
+            }
             return View( _petService.ObterTodos());
         }
 

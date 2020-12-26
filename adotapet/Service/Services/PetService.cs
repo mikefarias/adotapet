@@ -51,6 +51,11 @@ namespace Service.Services
             return _mapper.Map<List<PetViewModel>>(_petRepository.ObterTodos());
         }
 
+        public IEnumerable<PetViewModel> ObterPetsPorPalavraChave(string palavraChave)
+        {
+            return _mapper.Map<List<PetViewModel>>(_petRepository.ObterPetsPorPalavraChave(palavraChave));
+        }
+
         public void Remover(int id)
         {
             Pet pet = _petRepository.ObterPorId(id);
