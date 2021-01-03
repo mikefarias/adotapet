@@ -20,27 +20,35 @@
 
 <section>
     <div class="container">
-        <div class="row">
-            <div class="card-deck">
-
+        @{int nrColunas = 0;}
+        <div class="card-deck">
+            <div class="row">
                 @foreach (var item in Model)
                 {
-                    <div class="card mb-3" style="width: 18rem;">
-                        @if (item.Foto != null)
-                        {
+                    @if (nrColunas == 4)
+                    {
+                        nrColunas = 0;
+                        @:</div>
+                        <br>
+                        @:<div class="row">
+                    }
+                    <div class="col-sm">
+                        <div class="card mb-3" style="width: 18rem;">
                             <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Pet">
-                                <img class="card-img-top" src="~/img/profile_pet/@item.Foto" alt="@item.Foto">
+                                @if (item.Foto != null)
+                                {
+                                    <img class="card-img-top" src="~/img/profile_pet/@item.Foto" alt="@item.Foto">
+                                }
+                                else
+                                {
+                                    <img class="card-img-top img-fluid" src="~/img/profile_pet/image-not-found.png" alt="Card image cap">
+                                }
                             </a>
-                        }
-                        else
-                        {
-                            <a asp-action="Details" asp-route-id="@item.Id" asp-controller="Pet">
-                                <img class="card-img-top img-fluid" src="~/img/profile_pet/image-not-found.png" alt="Card image cap">
-                            </a>
-                        }
+                        </div>
                     </div>
+                    nrColunas++;
                 }
             </div>
-        </div>
+       </div>
     </div>
 </section>
