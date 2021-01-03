@@ -15,17 +15,17 @@
                 </span>
             </div>
         </div>
-    }
+    } 
 </section>
 
 <section>
-    <div class="container">
+    <div class="container-fluid">
         @{int nrColunas = 0;}
         <div class="card-deck">
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    @if (nrColunas == 4)
+                    @if (nrColunas == 3)
                     {
                         nrColunas = 0;
                         @:</div>
