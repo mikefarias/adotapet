@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data" asp-action="Editar" >
+        <form method="post" enctype="multipart/form-data" asp-action="Editar">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -62,5 +62,11 @@
 </div>
 
 @section Scripts {
+    <script>
+        $(function () {
+
+            $("#DataNascimento").mask("00/00/0000", { placeholder: "__ /__ / _____" });
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
