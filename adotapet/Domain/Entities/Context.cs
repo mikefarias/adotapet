@@ -10,9 +10,13 @@ namespace Domain.Entities
 {
     public class Context : DbContext
     {
+        public Context(DbContextOptions<Context> options) : base(options)
+        {
+            this.ChangeTracker.LazyLoadingEnabled = false;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionString: @"Server=(localdb)\mssqllocaldb;Database=adotapet3;Integrated Security=True");
             optionsBuilder.UseLazyLoadingProxies();
         }
 

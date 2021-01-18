@@ -16,6 +16,8 @@ using Service.AutoMapper;
 using Service.Services;
 using Service.Interfaces;
 using Application;
+using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace adotapet
 {
@@ -31,8 +33,8 @@ namespace adotapet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
-            services.AddDbContext<Context>();
             services.AddAutoMapper(typeof(ConfigurationMapper));
             services.AddDependencyInjectionConfiguration();
         }
