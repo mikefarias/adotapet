@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,7 +15,8 @@ namespace Service.Models
         public string Nome { get; set; }
 
         [DisplayName("Data de Nascimento")]
-        public string DataNascimento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DataNascimento { get; set; }
 
         [DisplayName("RG")]
         public string RG { get; set; }

@@ -21,7 +21,7 @@ namespace Domain.Entities
         public String Foto { get; set; }
 
         [DisplayName("Data de Nascimento")]
-        public string DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         [DisplayName("Raça")]
         public string Raca { get; set; }

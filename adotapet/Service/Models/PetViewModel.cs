@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,7 +21,8 @@ namespace Service.Models
         [DisplayName("Foto Perfil")]
         public IFormFile ArquivoFoto { get; set; }
         [DisplayName("Data de Nascimento")]
-        public string DataNascimento { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime DataNascimento { get; set; }
         [DisplayName("Raça")]
         public string Raca { get; set; }
         [DisplayName("Ong")]

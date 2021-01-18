@@ -14,7 +14,7 @@ namespace Domain.Entities
         public string Nome { get; set; }
 
         [DisplayName("Data de Nascimento")]
-        public string DataNascimento { get; set; }
+        public DateTime DataNascimento { get; set; }
 
         [DisplayName("RG")]
         public string RG{ get; set; }
