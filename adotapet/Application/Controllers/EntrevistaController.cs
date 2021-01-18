@@ -64,8 +64,8 @@ namespace Application.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdPet"] = new SelectList(_petService.ObterTodos(), "IdPet", "Nome", entrevista.IdPet);
-            ViewData["IdAdotante"] = new SelectList(_adotanteService.ObterTodos(), "IdAdotante", "Nome", entrevista.IdAdotante);
+            ViewData["IdPet"] = new SelectList(_petService.ObterTodos(), "Id", "Nome");
+            ViewData["IdAdotante"] = new SelectList(_adotanteService.ObterTodos(), "Id", "Nome");
             return View(entrevista);
         }
 
@@ -90,6 +90,9 @@ namespace Application.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["IdPet"] = new SelectList(_petService.ObterTodos(), "Id", "Nome");
+            ViewData["IdAdotante"] = new SelectList(_adotanteService.ObterTodos(), "Id", "Nome");
+
             return View(entrevista);
         }
 

@@ -25,6 +25,11 @@ namespace Domain.Entities
         {
             modelBuilder.Entity<Pet>()
                 .HasOne(p => p.Ong);
+            modelBuilder.Entity<Entrevista>()
+                .HasOne(p => p.Pet);
+            modelBuilder.Entity<Entrevista>()
+                .HasOne(p => p.Adotante);
+
         }
 
     }
