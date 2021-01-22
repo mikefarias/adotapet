@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
+using Domain.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Service.AutoMapper;
 
 namespace API.Bebs
 {
@@ -26,7 +30,15 @@ namespace API.Bebs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllersWithViews();
+            services.AddAutoMapper(typeof(ConfigurationMapper));
+            services.AddDependencyInjectionConfiguration();
+            services.AddControllers()
+                .ConfigureApiBehaviorOptions( options =>
+                {
+                    options.SuppressModelStateInvalidFilter = true;
+                });
             services.AddSwaggerGen(c =>
                 c.SwaggerDoc(name: "v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Adota Pet API", Version = "v1" })
             );
