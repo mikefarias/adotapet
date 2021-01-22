@@ -10,7 +10,7 @@ namespace Service.Interfaces
     {
         void Adicionar(OngViewModel ongViewModel);
 
-        OngViewModel Atualizar(OngViewModel ongViewModel);
+        OngViewModel Atualizar(OngViewModel ongViewModel, int id);
 
         OngViewModel ObterPorId(int id);
 

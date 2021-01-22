@@ -83,7 +83,7 @@ namespace Application.Controllers
             {
                 try
                 {
-                    _ongService.Atualizar(ong);
+                    _ongService.Atualizar(ong, id);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -29,9 +29,17 @@ namespace Service.Services
              _ongRepository.Inserir(ong );
         }
 
-        public OngViewModel Atualizar(OngViewModel ongViewModel)
+        public OngViewModel Atualizar(OngViewModel ongViewModel, int id)
         {
-            var ong = _ongRepository.Alterar(_mapper.Map<Ong>(ongViewModel));
+            var ong = _ongRepository.ObterPorId(id);
+
+            if (ong == null) return null;
+
+            ong.Nome = ongViewModel.Nome;
+            ong.Cnpj = ongViewModel.Cnpj;
+            ong.Endereco = ongViewModel.Endereco;
+            ong.Contato = ongViewModel.Contato;
+            _ongRepository.Alterar(ong);
 
             return _mapper.Map<OngViewModel>(ong);
         }

@@ -58,7 +58,7 @@ namespace Domain.Repositories.Concrete
 
         public void Dispose()
         {
-            GC.SuppressFinalize(this); ;
+            GC.SuppressFinalize(this);
         }
     }
 }
