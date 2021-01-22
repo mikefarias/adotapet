@@ -12,7 +12,7 @@ namespace Domain.Entities
     {
         public Context(DbContextOptions<Context> options) : base(options)
         {
-            this.ChangeTracker.LazyLoadingEnabled = false;
+            this.ChangeTracker.LazyLoadingEnabled = true;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
