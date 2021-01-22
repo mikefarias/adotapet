@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{E022FE6D-5F9E-411D-B558-4DAF22095A8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infra.CrossCutting.IoC", "Infra.CrossCutting.IoC\Infra.CrossCutting.IoC.csproj", "{17F31CC0-6D1A-4428-99A8-C3895B920098}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infra.CrossCutting.IoC", "Infra.CrossCutting.IoC\Infra.CrossCutting.IoC.csproj", "{17F31CC0-6D1A-4428-99A8-C3895B920098}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API.Bebs", "API.Bebs\API.Bebs.csproj", "{D62A5819-3C38-40F1-97AB-EE3C5571E164}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{17F31CC0-6D1A-4428-99A8-C3895B920098}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17F31CC0-6D1A-4428-99A8-C3895B920098}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17F31CC0-6D1A-4428-99A8-C3895B920098}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D62A5819-3C38-40F1-97AB-EE3C5571E164}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D62A5819-3C38-40F1-97AB-EE3C5571E164}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D62A5819-3C38-40F1-97AB-EE3C5571E164}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D62A5819-3C38-40F1-97AB-EE3C5571E164}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
