@@ -6,14 +6,20 @@ using System.Text;
 
 namespace Service.Notificacoes
 {
-    class Notificador : INotificador
+    public class Notificador : INotificador
     {
-        private List<Notificacao> _notificacoes;
+        private readonly List<Notificacao> _notificacoes;
 
-        public void Handle(Notificacao notificacao) => _notificacoes = new List<Notificacao>();
+        public Notificador()
+        {
+            _notificacoes = new List<Notificacao>();
+        }
+
+        public void Handle(Notificacao notificacao) => _notificacoes.Add(notificacao);
 
         public List<Notificacao> ObterNotificacoes() => _notificacoes;
 
         public bool TemNotificacao() => _notificacoes.Any();
+
     }
 }

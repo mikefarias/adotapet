@@ -1,10 +1,9 @@
-﻿using Domain.Entities;
-using Domain.Repositories.Abstract;
+﻿using Domain.Repositories.Abstract;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace Domain.Repositories.Concrete
 {
@@ -21,6 +20,11 @@ namespace Domain.Repositories.Concrete
 
         public BaseRepository() 
         {
+        }
+
+        public IEnumerable<T> Obter(Expression<Func<T, bool>> predicate)
+        {
+            return (IEnumerable<T>) dbSet.AsNoTracking().Where(predicate).ToList();
         }
 
         public T ObterPorId(int id)

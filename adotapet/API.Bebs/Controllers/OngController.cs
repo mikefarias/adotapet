@@ -15,7 +15,7 @@ namespace API.Bebs.Controllers
     {
         private readonly IOngService _ongService;
         
-        public OngController(IOngService ongService) 
+        public OngController(IOngService ongService, INotificador notificador) : base(notificador) 
         {
             _ongService = ongService;    
         }
@@ -27,9 +27,12 @@ namespace API.Bebs.Controllers
         public IActionResult Obter(int id) =>  Retorno(_ongService.ObterPorId(id));
 
         [HttpPost]
-        public IActionResult Inserir(OngViewModel ong) {
+        public IActionResult Inserir(OngViewModel ong) 
+        {
+            if (!ModelState.IsValid) return Retorno(ModelState);
             _ongService.Adicionar(ong);
-            return Retorno();
+            
+            return Retorno(ong);
         }
 
         [HttpPut("{id}")]

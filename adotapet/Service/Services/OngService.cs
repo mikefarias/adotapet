@@ -1,30 +1,33 @@
 ﻿using Domain.Repositories.Abstract;
-using Domain.Repositories.Concrete;
 using Service.Models;
 using Service.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Domain.Entities;
 
 namespace Service.Services
 {
 
-    public class OngService : IOngService
+    public class OngService : BaseService, IOngService
     {
 
         private readonly IMapper _mapper;
         private readonly IOngRepository _ongRepository;
 
-        public OngService(IMapper mapper, IOngRepository ongRepository) 
+        public OngService(IMapper mapper, IOngRepository ongRepository, INotificador notificador) : base(notificador) 
         {
             _ongRepository = ongRepository;
             _mapper = mapper;
         }
         public void Adicionar(OngViewModel ongViewModel)
         {
+            if (_ongRepository.Obter(ong => ong.Cnpj == ongViewModel.Cnpj).Any()) 
+                Notificar("Já existe uma ONG com este CNPJ.");
+            if (_ongRepository.Obter(ong => ong.Nome == ongViewModel.Nome).Any())
+                Notificar("Já existe uma ONG com este Nome.");
+
             Ong ong = _mapper.Map<Ong>(ongViewModel);
              _ongRepository.Inserir(ong );
         }

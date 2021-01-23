@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Domain.Repositories.Abstract
 {
     public interface IBaseRepository<T>
     {
+        IEnumerable<T> Obter(Expression<Func<T, bool>> parametros);
+
         /// <summary>
         /// Obtém por Id
         /// </summary>
@@ -17,7 +20,6 @@ namespace Domain.Repositories.Abstract
         /// <summary>
         /// Obtém todos com os includes listados
         /// </summary>
-        /// <param name="includes">Includes</param>
         /// <returns>Queryable da entity</returns>
         IEnumerable<T> ObterTodos();
 

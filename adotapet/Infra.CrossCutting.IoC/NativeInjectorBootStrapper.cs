@@ -3,6 +3,7 @@ using Domain.Repositories.Abstract;
 using Microsoft.Extensions.DependencyInjection;
 using Service.Interfaces;
 using Service.Services;
+using Service.Notificacoes;
 using Domain.Repositories.Concrete;
 using System;
 
@@ -26,6 +27,8 @@ namespace Infra.CrossCutting.IoC
             services.AddTransient<IPetRepository, PetRepository>();
             services.AddTransient<IAdotanteRepository, AdotanteRepository>();
             services.AddTransient<IEntrevistaRepository, EntrevistaRepository>();
+
+            services.AddScoped<INotificador, Notificador>();
 
             services.AddMemoryCache();
 

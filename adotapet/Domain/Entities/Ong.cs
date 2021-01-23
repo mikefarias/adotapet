@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Ong
+    public class Ong : Entidade
     {
         public int Id { get; set; }
 
