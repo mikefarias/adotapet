@@ -11,7 +11,7 @@ namespace API.Bebs.Controllers
 {
     [Route("api/ong")]
     [ApiController]
-    public class OngController : ControllerBase
+    public class OngController : CustomBaseController
     {
         private readonly IOngService _ongService;
         
@@ -21,34 +21,25 @@ namespace API.Bebs.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos()
-        {
-            return Ok(_ongService.ObterTodos());
-        }
+        public IActionResult ObterOngs() => Retorno(_ongService.ObterTodos());
 
         [HttpGet("{id}")]
-        public IActionResult Obter(int id) {
-
-            return Ok(_ongService.ObterPorId(id));
-        }
+        public IActionResult Obter(int id) =>  Retorno(_ongService.ObterPorId(id));
 
         [HttpPost]
         public IActionResult Inserir(OngViewModel ong) {
             _ongService.Adicionar(ong);
-            return Ok();
+            return Retorno();
         }
 
         [HttpPut("{id}")]
-        public IActionResult Atualizar(OngViewModel ongViewModel, int id )
-        {
-            return Ok(_ongService.Atualizar(ongViewModel, id));
-        }
+        public IActionResult Atualizar(OngViewModel ongViewModel, int id) => Retorno(_ongService.Atualizar(ongViewModel, id));
 
         [HttpDelete("{id}")]
         public IActionResult Remover(int id)
         {
             _ongService.Remover(id);
-            return Ok();
+            return Retorno();
         }
     }
 }
