@@ -8,15 +8,15 @@ namespace Service.Interfaces
 {
     public interface IOngService : IDisposable
     {
-        void Adicionar(OngViewModel ongViewModel);
+        bool Adicionar(OngViewModel ongViewModel);
 
-        OngViewModel Atualizar(OngViewModel ongViewModel, int id);
+        bool Atualizar(OngViewModel ongViewModel, int id);
 
         OngViewModel ObterPorId(int id);
 
         IEnumerable<OngViewModel> ObterTodos();
 
-        void Remover(int id);
+        bool Remover(int id);
 
     }
 }

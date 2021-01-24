@@ -30,7 +30,7 @@ namespace API.Bebs.Controllers
                     });
             }
 
-            return BadRequest(new
+            return BadRequest( new
             {
                 sucess = false, 
                 errors = _notificador.ObterNotificacoes().Select(n => n.Mensagem)

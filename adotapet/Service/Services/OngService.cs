@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using Domain.Entities;
+using Service.Models.Validations;
 
 namespace Service.Services
 {
@@ -21,51 +22,71 @@ namespace Service.Services
             _ongRepository = ongRepository;
             _mapper = mapper;
         }
-        public void Adicionar(OngViewModel ongViewModel)
+        public bool Adicionar(OngViewModel ongViewModel)
         {
-            if (_ongRepository.Obter(ong => ong.Cnpj == ongViewModel.Cnpj).Any()) 
-                Notificar("Já existe uma ONG com este CNPJ.");
-            if (_ongRepository.Obter(ong => ong.Nome == ongViewModel.Nome).Any())
-                Notificar("Já existe uma ONG com este Nome.");
-
             Ong ong = _mapper.Map<Ong>(ongViewModel);
-             _ongRepository.Inserir(ong );
+            bool temErro = ValidarOng(ong, ongViewModel);
+            if (!temErro) _ongRepository.Inserir(ong);
+            return temErro;
         }
 
-        public OngViewModel Atualizar(OngViewModel ongViewModel, int id)
+        public bool Atualizar(OngViewModel ongViewModel, int id)
         {
             var ong = _ongRepository.ObterPorId(id);
-
-            if (ong == null) return null;
-
-            ong.Nome = ongViewModel.Nome;
-            ong.Cnpj = ongViewModel.Cnpj;
-            ong.Endereco = ongViewModel.Endereco;
-            ong.Contato = ongViewModel.Contato;
-            _ongRepository.Alterar(ong);
-
-            return _mapper.Map<OngViewModel>(ong);
+            bool temErro = ValidarOng(ong, ongViewModel, true);
+            if (!temErro) 
+            {
+                ong.Nome = ongViewModel.Nome;
+                ong.Cnpj = ongViewModel.Cnpj;
+                ong.Endereco = ongViewModel.Endereco;
+                ong.Contato = ongViewModel.Contato;
+               _ongRepository.Alterar(ong);
+            }
+            return temErro;
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
+        public OngViewModel ObterPorId(int id) =>  _mapper.Map<OngViewModel>(_ongRepository.ObterPorId(id));
 
-        public OngViewModel ObterPorId(int id)
-        {
-            return _mapper.Map<OngViewModel>(_ongRepository.ObterPorId(id));
-        }
+        public IEnumerable<OngViewModel> ObterTodos() => _mapper.Map<List<OngViewModel>>(_ongRepository.ObterTodos());
 
-        public IEnumerable<OngViewModel> ObterTodos()
+        public bool Remover(int id)
         {
-            return _mapper.Map<List<OngViewModel>>(_ongRepository.ObterTodos());
-        }
-
-        public void Remover(int id)
-        {
-            Ong ong = _ongRepository.ObterPorId(id);
+            var ong = _ongRepository.ObterPorId(id);
+            if (ong == null) 
+            {
+                Notificar("Ong não encontrada.");
+                return false;
+            } 
             _ongRepository.Excluir(ong);
+            return true;
+        }
+
+        public void Dispose() => GC.SuppressFinalize(this);
+
+        private bool ValidarOng(Ong ong, OngViewModel ongViewModel,  bool atualizar = false) 
+        {
+            bool temErro = false;
+            if (atualizar && ong == null)
+            {
+                Notificar("Ong não encontrada.");
+                return true;
+            }
+
+            if (_ongRepository.Obter(ong => ong.Cnpj == ongViewModel.Cnpj).Any())
+            {
+                Notificar("Já existe uma ONG com este CNPJ.");
+                temErro = true;
+            }
+
+            if (_ongRepository.Obter(ong => ong.Nome == ongViewModel.Nome).Any())
+            {
+                Notificar("Já existe uma ONG com este Nome.");
+                temErro = true;
+            }
+
+            if (!ExecutarValidacao(new OngValidation(), ong)) temErro = true;
+
+            return temErro;
         }
     }
 }
