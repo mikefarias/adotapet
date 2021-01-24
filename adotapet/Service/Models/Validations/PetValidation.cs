@@ -6,23 +6,25 @@ using System.Text;
 
 namespace Service.Models.Validations
 {
-    class OngValidation : AbstractValidator<Ong> 
+    class PetValidation : AbstractValidator<Pet> 
     {
-        public OngValidation() {
-
-            RuleFor(o => o.Cnpj)
-                .NotEmpty().WithMessage(MensagensErro.ValorNaoInformado)
-                .GreaterThan(0).WithMessage(MensagensErro.ValorInvalido);
+        public PetValidation() {
 
             RuleFor(o => o.Nome)
                 .NotEmpty().WithMessage(MensagensErro.ValorNaoInformado);
 
-            RuleFor(o => o.Endereco)
+            RuleFor(o => o.Resumo)
                 .NotEmpty().WithMessage(MensagensErro.ValorNaoInformado);
 
-            RuleFor(o => o.Contato)
+            RuleFor(o => o.Ong)
+                .NotEmpty().WithMessage(MensagensErro.ValorNaoInformado);
+
+            RuleFor(o => o.Peso)
                 .NotEmpty().WithMessage(MensagensErro.ValorNaoInformado);
             
+            RuleFor(o => o.Raca)
+                .NotEmpty().WithMessage(MensagensErro.ValorNaoInformado);
+
         }
     }
 }

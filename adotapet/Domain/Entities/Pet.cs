@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class Pet
+    public class Pet : Entidade
     {
         public int Id { get; set; }
 

@@ -8,9 +8,9 @@ namespace Service.Interfaces
 {
     public interface IPetService : IDisposable
     {
-        void Adicionar(PetViewModel petViewModel);
+        bool Adicionar(PetViewModel petViewModel);
 
-        PetViewModel Atualizar(PetViewModel petViewModel);
+        bool Atualizar(PetViewModel petViewModel, int id);
 
         PetViewModel ObterPorId(int id);
 
@@ -18,7 +18,7 @@ namespace Service.Interfaces
 
         IEnumerable<PetViewModel> ObterPetsPorPalavraChave(string palavraChave);
 
-        void Remover(int id);
+        bool Remover(int id);
 
     }
 }

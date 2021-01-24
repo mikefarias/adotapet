@@ -51,7 +51,7 @@ namespace Service.Services
 
         public bool Remover(int id)
         {
-            var ong = _ongRepository.ObterPorId(id);
+            Ong ong = _ongRepository.ObterPorId(id);
             if (ong == null) 
             {
                 Notificar("Ong não encontrada.");
