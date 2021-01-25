@@ -32,14 +32,10 @@ namespace Service.Services
 
         public bool Atualizar(OngViewModel ongViewModel, int id)
         {
-            var ong = _ongRepository.ObterPorId(id);
+            Ong ong = _mapper.Map<Ong>(ongViewModel);
             bool temErro = ValidarOng(ong, ongViewModel, true);
             if (!temErro) 
             {
-                ong.Nome = ongViewModel.Nome;
-                ong.Cnpj = ongViewModel.Cnpj;
-                ong.Endereco = ongViewModel.Endereco;
-                ong.Contato = ongViewModel.Contato;
                _ongRepository.Alterar(ong);
             }
             return temErro;
@@ -72,13 +68,13 @@ namespace Service.Services
                 return true;
             }
 
-            if (_ongRepository.Obter(ong => ong.Cnpj == ongViewModel.Cnpj).Any())
+            if (_ongRepository.Obter(o => o.Cnpj == ongViewModel.Cnpj && o.Id != ongViewModel.Id).Any())
             {
                 Notificar("Já existe uma ONG com este CNPJ.");
                 temErro = true;
             }
 
-            if (_ongRepository.Obter(ong => ong.Nome == ongViewModel.Nome).Any())
+            if (_ongRepository.Obter(o => o.Nome == ongViewModel.Nome && o.Id != ongViewModel.Id).Any())
             {
                 Notificar("Já existe uma ONG com este Nome.");
                 temErro = true;

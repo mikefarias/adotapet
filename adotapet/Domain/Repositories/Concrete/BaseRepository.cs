@@ -24,7 +24,7 @@ namespace Domain.Repositories.Concrete
 
         public IEnumerable<T> Obter(Expression<Func<T, bool>> predicate)
         {
-            return (IEnumerable<T>) dbSet.AsNoTracking().Where(predicate).ToList();
+            return dbSet.AsNoTracking().Where(predicate).ToList();
         }
 
         public T ObterPorId(int id)
