@@ -34,23 +34,10 @@ namespace Service.Services
 
         public bool Atualizar(PetViewModel petViewModel, int id)
         {
-            var pet = _petRepository.Alterar(_mapper.Map<Pet>(petViewModel));
+            Pet pet = _mapper.Map<Pet>(petViewModel);
             bool temErro = ValidarPet(pet, petViewModel);
-            if (!temErro)
-            {
-                pet.Nome = petViewModel.Nome;
-                pet.Resumo = petViewModel.Resumo;
-                pet.IdOng = petViewModel.IdOng;
-                pet.Ong = petViewModel.Ong;
-                pet.Raca = petViewModel.Raca;
-                pet.Peso = petViewModel.Peso;
-            }
+            if (!temErro) _petRepository.Alterar(pet);
             return temErro;
-        }
-
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
         }
 
         public PetViewModel ObterPorId(int id) => _mapper.Map<PetViewModel>(_petRepository.ObterPorId(id));
@@ -72,6 +59,8 @@ namespace Service.Services
             return false;
         }
 
+        public void Dispose() => GC.SuppressFinalize(this);
+        
         private bool ValidarPet(Pet pet, PetViewModel petViewModel, bool atualizar = false)
         {
             bool temErro = false;
@@ -80,13 +69,11 @@ namespace Service.Services
                 Notificar("Pet não encontrado.");
                 return true;
             }
-
-            if (_petRepository.Obter(pet => pet.Nome == petViewModel.Nome && pet.IdOng == petViewModel.IdOng).Any())
+            if (_petRepository.Obter(pet => pet.Nome == petViewModel.Nome && pet.IdOng != petViewModel.IdOng) .Any())
             {
                 Notificar("Já existe um Pet com este Nome.");
                 temErro = true;
             }
-
             if (!ExecutarValidacao(new PetValidation(), pet)) temErro = true;
 
             return temErro;

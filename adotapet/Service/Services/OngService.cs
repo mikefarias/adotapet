@@ -34,10 +34,7 @@ namespace Service.Services
         {
             Ong ong = _mapper.Map<Ong>(ongViewModel);
             bool temErro = ValidarOng(ong, ongViewModel, true);
-            if (!temErro) 
-            {
-               _ongRepository.Alterar(ong);
-            }
+            if (!temErro) _ongRepository.Alterar(ong);
             return temErro;
         }
 
