@@ -35,8 +35,19 @@ namespace API.Bebs.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult Atualizar(OngViewModel ongViewModel, int id) => Retorno(_ongService.Atualizar(ongViewModel, id));
+        public IActionResult Atualizar(OngViewModel ongViewModel, int id)
+        {
+            if (id != ongViewModel.Id)
+            {
+                NotificarErro("Os ids informados não são idênticos!");
+                Retorno();
+            }
+            if (!ModelState.IsValid) return Retorno(ongViewModel);
 
+
+            return Retorno(_ongService.Atualizar(ongViewModel, id));
+        }
+        
         [HttpDelete("{id}")]
         public IActionResult Remover(int id)
         {

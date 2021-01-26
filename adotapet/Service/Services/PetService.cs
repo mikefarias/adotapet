@@ -58,7 +58,6 @@ namespace Service.Services
             _petRepository.Excluir(pet);
             return false;
         }
-
         public void Dispose() => GC.SuppressFinalize(this);
         
         private bool ValidarPet(Pet pet, PetViewModel petViewModel, bool atualizar = false)

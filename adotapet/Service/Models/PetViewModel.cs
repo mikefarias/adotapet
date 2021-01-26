@@ -19,7 +19,7 @@ namespace Service.Models
         [DisplayName("Foto")]
         public string Foto { get; set; }
         [DisplayName("Foto Perfil")]
-        public IFormFile ArquivoFoto { get; set; }
+        public string ArquivoFoto { get; set; }
         [DisplayName("Data de Nascimento")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DataNascimento { get; set; }
