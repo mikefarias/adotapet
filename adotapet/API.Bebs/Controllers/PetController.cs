@@ -25,18 +25,12 @@ namespace API.Bebs.Controllers
         public IActionResult ObterPets() => Retorno(_petService.ObterTodos());
 
         [HttpGet("{id}")]
-        public IActionResult Obter(int id) =>  Retorno(_petService.ObterPorId(id));
-
+        public IActionResult Obter(int id) => Retorno(_petService.ObterPorId(id));
+        
         [HttpPost]
         public IActionResult Inserir(PetViewModel pet) 
         {
             if (!ModelState.IsValid) return Retorno(ModelState);
-
-            var foto = Guid.NewGuid() + "_" + pet.Foto;
-            if (!UploadArquivo(pet.ArquivoFoto, foto))
-            {
-                return Retorno(pet);
-            }
             _petService.Adicionar(pet);
             return Retorno(pet);
         }
@@ -45,15 +39,6 @@ namespace API.Bebs.Controllers
         public IActionResult Atualizar(PetViewModel petViewModel, int id)
         {
             if (!ModelState.IsValid) return Retorno(ModelState);
-
-            if (petViewModel.ArquivoFoto!= null)
-            {
-                var foto = Guid.NewGuid() + "_" + petViewModel.Foto;
-                if (!UploadArquivo(petViewModel.ArquivoFoto, foto))
-                {
-                    return Retorno(ModelState);
-                }
-            }
             return Retorno(_petService.Atualizar(petViewModel, id));
         }
 
@@ -63,28 +48,6 @@ namespace API.Bebs.Controllers
             _petService.Remover(id);
             return Retorno();
         }
-
-        private bool UploadArquivo(string arquivo, string imgNome)
-        {
-            if (string.IsNullOrEmpty(arquivo))
-            {
-                NotificarErro("Forneça uma imagem para este produto!");
-                return false;
-            }
-
-            var imageDataByteArray = Convert.FromBase64String(arquivo);
-
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pets", imgNome);
-
-            if (System.IO.File.Exists(filePath))
-            {
-                NotificarErro("Já existe um arquivo com este nome!");
-                return false;
-            }
-
-            System.IO.File.WriteAllBytes(filePath, imageDataByteArray);
-
-            return true;
-        }
     }
+
 }

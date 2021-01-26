@@ -26,6 +26,12 @@ namespace Service.Services
         }
         public bool Adicionar(PetViewModel petViewModel)
         {
+            petViewModel.Foto = Guid.NewGuid() + "_" + petViewModel.Foto;
+            if (!UploadArquivo(petViewModel.ArquivoFoto, petViewModel.Foto))
+            {
+                Notificar("Não foi possível salvar imagem.");
+                return false;
+            }
             Pet pet = _mapper.Map<Pet>(petViewModel);
             bool temErro = ValidarPet(pet, petViewModel);
             if(!temErro) _petRepository.Inserir(pet );
@@ -34,13 +40,27 @@ namespace Service.Services
 
         public bool Atualizar(PetViewModel petViewModel, int id)
         {
+            if (petViewModel.ArquivoFoto != null)
+            {
+                petViewModel.Foto = Guid.NewGuid() + "_" + petViewModel.Foto;
+                if (!UploadArquivo(petViewModel.ArquivoFoto, petViewModel.Foto))
+                {
+                    Notificar("Não foi possível salvar imagem.");
+                    return false;
+                }
+            }
             Pet pet = _mapper.Map<Pet>(petViewModel);
             bool temErro = ValidarPet(pet, petViewModel);
             if (!temErro) _petRepository.Alterar(pet);
             return temErro;
         }
 
-        public PetViewModel ObterPorId(int id) => _mapper.Map<PetViewModel>(_petRepository.ObterPorId(id));
+        public PetViewModel ObterPorId(int id)
+        {
+            var pet = _mapper.Map<PetViewModel>( _petRepository.ObterPorId(id)); 
+            pet.ArquivoFoto = ObterimagemBase64(pet.Foto);
+            return (pet);
+        }
 
         public IEnumerable<PetViewModel> ObterTodos() => _mapper.Map<List<PetViewModel>>(_petRepository.ObterTodos());
 
