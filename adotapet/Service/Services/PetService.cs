@@ -24,6 +24,7 @@ namespace Service.Services
             _petRepository = petRepository;
             _mapper = mapper;
         }
+        
         public bool Adicionar(PetViewModel petViewModel)
         {
             petViewModel.Foto = Guid.NewGuid() + "_" + petViewModel.Foto;
@@ -40,6 +41,8 @@ namespace Service.Services
 
         public bool Atualizar(PetViewModel petViewModel, int id)
         {
+            string fotoAntiga = null;
+            Pet pet = _petRepository.ObterPorId(id);
             if (petViewModel.ArquivoFoto != null)
             {
                 petViewModel.Foto = Guid.NewGuid() + "_" + petViewModel.Foto;
@@ -48,24 +51,46 @@ namespace Service.Services
                     Notificar("Não foi possível salvar imagem.");
                     return false;
                 }
+                fotoAntiga = pet.Foto;
             }
-            Pet pet = _mapper.Map<Pet>(petViewModel);
+
             bool temErro = ValidarPet(pet, petViewModel);
-            if (!temErro) _petRepository.Alterar(pet);
+            if (!temErro)
+            {
+                pet.Nome = petViewModel.Nome;
+                pet.Resumo = petViewModel.Resumo;
+                pet.Foto = petViewModel.Foto;
+                pet.DataNascimento = petViewModel.DataNascimento;
+                pet.IdOng = petViewModel.IdOng;
+                pet.Raca = petViewModel.Raca;
+                pet.Peso = petViewModel.Peso;
+                _petRepository.Alterar(pet);
+                if (fotoAntiga != null) ExcluirImagemDiretorio(fotoAntiga);
+            } 
             return temErro;
         }
 
         public PetViewModel ObterPorId(int id)
         {
             var pet = _mapper.Map<PetViewModel>( _petRepository.ObterPorId(id)); 
-            pet.ArquivoFoto = ObterimagemBase64(pet.Foto);
+            pet.ArquivoFoto = ObterImagemBase64(pet.Foto);
             return (pet);
         }
 
-        public IEnumerable<PetViewModel> ObterTodos() => _mapper.Map<List<PetViewModel>>(_petRepository.ObterTodos());
-
-        public IEnumerable<PetViewModel> ObterPetsPorPalavraChave(string palavraChave) => 
-            _mapper.Map<List<PetViewModel>>(_petRepository.ObterPetsPorPalavraChave(palavraChave));
+        public IEnumerable<PetViewModel> ObterTodos()
+        {
+            var pets = _mapper.Map<List<PetViewModel>>(_petRepository.ObterTodos());
+            foreach (var pet in pets)
+                pet.ArquivoFoto = ObterImagemBase64(pet.Foto);
+            return pets; 
+        }
+        public IEnumerable<PetViewModel> ObterPetsPorPalavraChave(string palavraChave)
+        {
+            var pets = _mapper.Map<List<PetViewModel>>(_petRepository.ObterPetsPorPalavraChave(palavraChave));
+            foreach (var pet in pets)
+                pet.ArquivoFoto = ObterImagemBase64(pet.Foto);
+            return pets;
+        }
 
         public bool Remover(int id)
         {
@@ -75,6 +100,7 @@ namespace Service.Services
                 Notificar("Pet não encontrado.");
                 return false;
             }
+            ExcluirImagemDiretorio(pet.Foto);
             _petRepository.Excluir(pet);
             return false;
         }

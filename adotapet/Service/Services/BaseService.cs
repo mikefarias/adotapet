@@ -34,7 +34,7 @@ namespace Service.Services
             return false;
         }
 
-        protected bool UploadArquivo(string arquivo, string imgNome)
+        protected bool UploadArquivo(string arquivo, string nomeImagem)
         {
             if (string.IsNullOrEmpty(arquivo))
             {
@@ -44,7 +44,7 @@ namespace Service.Services
 
             var imageDataByteArray = Convert.FromBase64String(arquivo);
 
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pets", imgNome);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pets", nomeImagem);
 
             if (System.IO.File.Exists(filePath))
             {
@@ -56,14 +56,14 @@ namespace Service.Services
 
             return true;
         }
-        protected string ObterimagemBase64(string imgNome)
+        protected string ObterImagemBase64(string nomeImagem)
         {
-            if (string.IsNullOrEmpty(imgNome))
+            if (string.IsNullOrEmpty(nomeImagem))
             {
                 Notificar("Imagem não informada.");
                 return "";
             }
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pets", imgNome);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pets", nomeImagem);
 
             if (!System.IO.File.Exists(filePath))
             {
@@ -75,6 +75,13 @@ namespace Service.Services
             var imagemBase64 = Convert.ToBase64String(imageDataByteArray);
 
             return imagemBase64;
+        }
+
+        protected bool ExcluirImagemDiretorio(string nomeImagem) 
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/pets", nomeImagem);
+            System.IO.File.Delete(filePath);
+            return true;
         }
     }
 }
