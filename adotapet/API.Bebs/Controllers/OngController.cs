@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Bebs.Extensoes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,7 @@ namespace API.Bebs.Controllers
             _ongService = ongService;    
         }
 
+        [ClaimsAutorize("Ong","Consulta")]
         [HttpGet]
         public IActionResult ObterOngs() => Retorno(_ongService.ObterTodos());
 
