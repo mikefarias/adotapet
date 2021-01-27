@@ -58,6 +58,10 @@ namespace API.Bebs
             {
                 app.UseDeveloperExceptionPage();
             }
+            else 
+            {
+                app.UseHsts();
+            }
 
             
             app.UseSwagger();
