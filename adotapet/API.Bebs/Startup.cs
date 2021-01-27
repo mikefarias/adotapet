@@ -59,7 +59,6 @@ namespace API.Bebs
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseAuthentication();
             
             app.UseSwagger();
             app.UseSwaggerUI(c =>
@@ -70,10 +69,9 @@ namespace API.Bebs
             ); 
             
             app.UseHttpsRedirection();
-
-            app.UseHttpsRedirection();
-
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
