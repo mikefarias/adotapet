@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using API.Bebs.Extensoes;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +15,7 @@ namespace API.Bebs.Config
           
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddRoles<IdentityRole>()
+                .AddErrorDescriber<IdentityMensagensPortugues>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
