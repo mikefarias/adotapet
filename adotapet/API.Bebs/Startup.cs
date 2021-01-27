@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using API.Bebs.Config;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,6 +34,7 @@ namespace API.Bebs
         {
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+            services.AddIdentityConfiguration(Configuration);
             services.AddAutoMapper(typeof(ConfigurationMapper));
             services.AddDependencyInjectionConfiguration();
             services.AddControllers()
@@ -56,6 +59,8 @@ namespace API.Bebs
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseAuthentication();
+            
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -69,8 +74,6 @@ namespace API.Bebs
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

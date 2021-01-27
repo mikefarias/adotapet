@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Interfaces;
@@ -9,6 +10,7 @@ using Service.Models;
 
 namespace API.Bebs.Controllers
 {
+    [Authorize]
     [Route("api/ong")]
     [ApiController]
     public class OngController : CustomBaseController
