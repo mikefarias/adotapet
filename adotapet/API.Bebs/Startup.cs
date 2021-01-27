@@ -34,6 +34,17 @@ namespace API.Bebs
         {
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Development",
+                    builder =>
+                    builder
+                    .SetIsOriginAllowed(_ => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    );
+            });
             services.AddIdentityConfiguration(Configuration);
             services.AddAutoMapper(typeof(ConfigurationMapper));
             services.AddDependencyInjectionConfiguration();
@@ -57,10 +68,12 @@ namespace API.Bebs
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseCors("Development");
             }
             else 
             {
                 app.UseHsts();
+                app.UseCors("Production");
             }
 
             
@@ -70,8 +83,9 @@ namespace API.Bebs
                 c.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "Adota Pet API");
                 c.RoutePrefix = string.Empty;
             }
-            ); 
-            
+            );
+
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthentication();
