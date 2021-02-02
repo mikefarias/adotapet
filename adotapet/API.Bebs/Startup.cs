@@ -34,17 +34,12 @@ namespace API.Bebs
         {
             services.AddDbContext<Context>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
-            services.AddCors(options =>
+            services.AddCors(o => o.AddPolicy("Development", builder =>
             {
-                options.AddPolicy("Development",
-                    builder =>
-                    builder
-                    .SetIsOriginAllowed(_ => true)
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials()
-                    );
-            });
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddIdentityConfiguration(Configuration);
             services.AddAutoMapper(typeof(ConfigurationMapper));
             services.AddDependencyInjectionConfiguration();
