@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Service.Models;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
 
 namespace Service.Services
 {
@@ -17,6 +16,8 @@ namespace Service.Services
 
         [Compare("Password", ErrorMessage = "As senhas não conferem.")]
         public string ConfirmPassword { get; set; }
+
+        public OngViewModel Ong { get; set; }
     }
 
     public class UserTokenViewModel

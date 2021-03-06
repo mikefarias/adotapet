@@ -45,6 +45,7 @@ namespace API.Bebs.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, registrarUsuario.Password);
+            //create ONG
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
