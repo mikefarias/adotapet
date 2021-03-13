@@ -27,7 +27,7 @@ namespace Service.Services
             Ong ong = _mapper.Map<Ong>(ongViewModel);
             bool temErro = ValidarOng(ong, ongViewModel);
             if (!temErro) _ongRepository.Inserir(ong);
-            return temErro;
+            return !temErro;
         }
 
         public bool Atualizar(OngViewModel ongViewModel, int id)
@@ -35,7 +35,7 @@ namespace Service.Services
             Ong ong = _mapper.Map<Ong>(ongViewModel);
             bool temErro = ValidarOng(ong, ongViewModel, true);
             if (!temErro) _ongRepository.Alterar(ong);
-            return temErro;
+            return !temErro;
         }
 
         public OngViewModel ObterPorId(int id) =>  _mapper.Map<OngViewModel>(_ongRepository.ObterPorId(id));

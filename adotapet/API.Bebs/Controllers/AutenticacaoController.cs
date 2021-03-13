@@ -48,21 +48,22 @@ namespace API.Bebs.Controllers
                 EmailConfirmed = true
             };
 
-            var result = await _userManager.CreateAsync(user, registrarUsuario.Password);
-            
-            if (result.Succeeded)
+            var resultUser = await _userManager.CreateAsync(user, registrarUsuario.Password);
+
+            if (resultUser.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
                 var ong = registrarUsuario.Ong;
                 ong.IdUsuario = user.Id ;
                 ong.Usuario = user;
-                _ongService.Adicionar(ong);
+                var resultOng = _ongService.Adicionar(ong);
+                if(!resultOng)  await _userManager.DeleteAsync(user);
                 return Retorno(await GerarToken(registrarUsuario.Email));
             }
 
-            foreach (var erro in result.Errors)
+            foreach (var erro in resultUser.Errors)
                 NotificarErro(erro.Description);
-
+                
             return Retorno();
         }
 
