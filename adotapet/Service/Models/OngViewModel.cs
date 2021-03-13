@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -21,5 +22,9 @@ namespace Service.Models
 
         [DisplayName("Contato")]
         public string Contato { get; set; }
+
+        public string IdUsuario { get; set; }
+
+        public IdentityUser Usuario { get; set; }
     }
 }
