@@ -21,15 +21,19 @@ namespace API.Bebs.Controllers
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly AppSettings _appSettings;
+        private readonly IOngService _ongService;
+
         public AutenticacaoController(INotificador notificador,
                                         SignInManager<IdentityUser> signInManager,
                                         UserManager<IdentityUser> userManager,
-                                        IOptions<AppSettings> appSettings 
+                                        IOptions<AppSettings> appSettings,
+                                        IOngService ongService
                                         ) : base(notificador) 
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _appSettings = appSettings.Value;
+            _ongService = ongService;
         }
 
         [HttpPost("registrar")]
@@ -45,10 +49,14 @@ namespace API.Bebs.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, registrarUsuario.Password);
-            //create ONG
+            
             if (result.Succeeded)
             {
                 await _signInManager.SignInAsync(user, false);
+                var ong = registrarUsuario.Ong;
+                ong.IdUsuario = user.Id ;
+                ong.Usuario = user;
+                _ongService.Adicionar(ong);
                 return Retorno(await GerarToken(registrarUsuario.Email));
             }
 

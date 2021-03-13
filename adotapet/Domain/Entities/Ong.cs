@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities
 {
@@ -23,6 +20,11 @@ namespace Domain.Entities
         [DisplayName("Contato")]
         public string Contato { get; set; }
 
+        [DisplayName("Usuario")]
+        [ForeignKey("Usuario")]
+        public string IdUsuario { get; set; }
+
+        public virtual IdentityUser Usuario { get; set; }
 
     }
 }

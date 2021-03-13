@@ -4,14 +4,16 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Domain.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20210307020720_UserOng")]
+    partial class UserOng
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -93,15 +95,18 @@ namespace Domain.Migrations
                     b.Property<string>("Endereco")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("IdUsuario")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("IdUser")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("IdUsuario");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Ong");
                 });
@@ -217,11 +222,11 @@ namespace Domain.Migrations
 
             modelBuilder.Entity("Domain.Entities.Ong", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("IdUsuario");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Usuario");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Pet", b =>
