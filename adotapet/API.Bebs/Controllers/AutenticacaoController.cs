@@ -50,20 +50,29 @@ namespace API.Bebs.Controllers
 
             var resultUser = await _userManager.CreateAsync(user, registrarUsuario.Password);
 
-            if (resultUser.Succeeded)
+            try
             {
-                await _signInManager.SignInAsync(user, false);
-                var ong = registrarUsuario.Ong;
-                ong.IdUsuario = user.Id ;
-                ong.Usuario = user;
-                var resultOng = _ongService.Adicionar(ong);
-                if(!resultOng)  await _userManager.DeleteAsync(user);
-                return Retorno(await GerarToken(registrarUsuario.Email));
+                if (resultUser.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, false);
+                    var ong = registrarUsuario.Ong;
+                    ong.IdUsuario = user.Id;
+                    ong.Usuario = user;
+                    var resultOng = _ongService.Adicionar(ong);
+                    if (!resultOng) await _userManager.DeleteAsync(user);
+                    return Retorno(await GerarToken(registrarUsuario.Email));
+                }
+
+                foreach (var erro in resultUser.Errors)
+                    NotificarErro(erro.Description);
+
+            }
+            catch (Exception e)
+            {
+                NotificarErro("Comportamento Inesperado");
             }
 
-            foreach (var erro in resultUser.Errors)
-                NotificarErro(erro.Description);
-                
+
             return Retorno();
         }
 
