@@ -59,8 +59,11 @@ namespace API.Bebs.Controllers
                     ong.IdUsuario = user.Id;
                     ong.Usuario = user;
                     var resultOng = _ongService.Adicionar(ong);
-                    if (!resultOng) await _userManager.DeleteAsync(user);
-                    return Retorno(await GerarToken(registrarUsuario.Email));
+                    if (!resultOng) {
+                        await _userManager.DeleteAsync(user);
+                    }
+                    else
+                        return Retorno(await GerarToken(registrarUsuario.Email));
                 }
 
                 foreach (var erro in resultUser.Errors)
