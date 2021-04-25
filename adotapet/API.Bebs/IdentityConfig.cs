@@ -1,4 +1,5 @@
 ﻿using API.Bebs.Extensoes;
+using Domain.Identity.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -7,19 +8,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace API.Bebs.Config
+namespace API.Bebs
 {
     public static class IdentityConfig
     {
         public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<UsuarioDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
           
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<Usuario, IdentityRole>()
                 .AddRoles<IdentityRole>()
                 .AddErrorDescriber<IdentityMensagensPortugues>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<UsuarioDbContext>()
                 .AddDefaultTokenProviders();
 
             //JWT
